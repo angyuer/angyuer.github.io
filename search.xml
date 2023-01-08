@@ -4,59 +4,9 @@
   
     
     <entry>
-      <title>Mac小技巧</title>
-      <link href="/2022/12/04/Mac%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
-      <url>/2022/12/04/Mac%E5%B0%8F%E6%8A%80%E5%B7%A7/</url>
-      
-        <content type="html"><![CDATA[<h3 id="快速打开终端："><a href="#快速打开终端：" class="headerlink" title="快速打开终端："></a>快速打开终端：</h3><pre><code> command + space 搜索 terminal 打开终端</code></pre><h3 id="使用终端打开某个文件夹："><a href="#使用终端打开某个文件夹：" class="headerlink" title="使用终端打开某个文件夹："></a>使用终端打开某个文件夹：</h3><pre><code> 1.打开你想要的文件夹，打开目录点击option，在下方显示的路径上点击鼠标就会出现使用终端打开此文件夹 2.在终端内输入 cd 加上文件夹路径（在要打开的文件夹中打开显示简介，复制路径地址）粘贴在cd 后边</code></pre><h3 id><a href="#" class="headerlink" title></a></h3>]]></content>
-      
-      
-      <categories>
-          
-          <category> Mac </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Mac </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Hexo的本地启动</title>
-      <link href="/2022/08/28/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"/>
-      <url>/2022/08/28/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
-      
-        <content type="html"><![CDATA[<h2 id="怎么打开本地hexo-使用终端打开hexo文件夹（hexo的根目录，就是有db-json的那个目录）"><a href="#怎么打开本地hexo-使用终端打开hexo文件夹（hexo的根目录，就是有db-json的那个目录）" class="headerlink" title="怎么打开本地hexo 使用终端打开hexo文件夹（hexo的根目录，就是有db.json的那个目录）"></a>怎么打开本地hexo 使用终端打开hexo文件夹（hexo的根目录，就是有db.json的那个目录）</h2><pre><code>输入以下命令：  hexo clean  hexo g  hexo d   hexo s 启动本地hexo</code></pre><h2 id="怎么设置文章作者："><a href="#怎么设置文章作者：" class="headerlink" title="怎么设置文章作者："></a>怎么设置文章作者：</h2><pre><code>按照volantis官方文档指示，在source中新建_data/author.yml文件，按照格式规定写出来。</code></pre><p>我的第一篇博客，不知道写点儿啥，先看看</p><p>我也不知道怎么设置作者 很烦！！！</p><p>想修改 主题 不知道怎么修改主题</p><p><a href="https://github.com/volantis-x/hexo-theme-volantis.git">https://github.com/volantis-x/hexo-theme-volantis.git</a></p><p><a href="https://github.com/volantis-x/hexo-theme-volantis/">https://github.com/volantis-x/hexo-theme-volantis/</a> themes&#x2F;volantis</p><p><a href="https://github.com/angyuer/hexo-theme-volantis/">https://github.com/angyuer/hexo-theme-volantis/</a> themes&#x2F;volantis</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> Hexo </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Hexo </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Hello World</title>
-      <link href="/2022/08/27/hello-world/"/>
-      <url>/2022/08/27/hello-world/</url>
+      <link href="/angyuer/2022/08/27/hello-world/"/>
+      <url>/angyuer/2022/08/27/hello-world/</url>
       
         <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
       
