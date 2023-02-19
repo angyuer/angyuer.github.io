@@ -6,7 +6,7 @@
   <link href="https://angyuer.com/atom.xml" rel="self"/>
   
   <link href="https://angyuer.com/"/>
-  <updated>2023-02-19T11:52:42.746Z</updated>
+  <updated>2023-02-19T14:59:57.706Z</updated>
   <id>https://angyuer.com/</id>
   
   <author>
@@ -21,11 +21,17 @@
     <link href="https://angyuer.com/2023/02/19/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/"/>
     <id>https://angyuer.com/2023/02/19/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/</id>
     <published>2023-02-19T11:52:42.000Z</published>
-    <updated>2023-02-19T11:52:42.746Z</updated>
+    <updated>2023-02-19T14:59:57.706Z</updated>
     
     
     
     
+    <category term="日常" scheme="https://angyuer.com/categories/%E6%97%A5%E5%B8%B8/"/>
+    
+    
+    <category term="默认" scheme="https://angyuer.com/tags/%E9%BB%98%E8%AE%A4/"/>
+    
+    <category term="记录" scheme="https://angyuer.com/tags/%E8%AE%B0%E5%BD%95/"/>
     
   </entry>
   
