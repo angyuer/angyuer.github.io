@@ -531,10 +531,10 @@ tag_ui: # 留空或 index
 # Website Background (設置網站背景)
 # can set it to color or image (可設置圖片 或者 顔色)
 # The formal of image: url(http://xxxxxx.com/xxx.jpg)
-background: /images/background.png
+background: "#ffffff" # /images/background.png
 
 # Footer Background
-footer_bg: false
+footer_bg: true
 
 # the position of bottom right button/default unit: px (右下角按鈕距離底部的距離/默認單位為px)
 rightside-bottom:
@@ -894,6 +894,7 @@ css_prefix: true
 inject:
   head:
     # - <link rel="stylesheet" href="/xxx.css">
+    - <script defer src="/live2d-widget-master/autoload.js"></script>
   bottom:
     # - <script src="xxxx"></script>
 
@@ -973,3 +974,5 @@ CDN:
     # artalk_js:
     # artalk_css:
     # busuanzi:
+live2d:
+  enable: true
