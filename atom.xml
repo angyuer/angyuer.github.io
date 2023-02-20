@@ -6,7 +6,7 @@
   <link href="https://angyuer.com/atom.xml" rel="self"/>
   
   <link href="https://angyuer.com/"/>
-  <updated>2023-02-19T14:59:57.706Z</updated>
+  <updated>2023-02-20T15:27:53.117Z</updated>
   <id>https://angyuer.com/</id>
   
   <author>
@@ -17,12 +17,76 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>md文件的基本常用编写语法</title>
+    <link href="https://angyuer.com/2023/02/20/md%E6%96%87%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%B8%B8%E7%94%A8%E7%BC%96%E5%86%99%E8%AF%AD%E6%B3%95/"/>
+    <id>https://angyuer.com/2023/02/20/md%E6%96%87%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%B8%B8%E7%94%A8%E7%BC%96%E5%86%99%E8%AF%AD%E6%B3%95/</id>
+    <published>2023-02-20T15:23:30.000Z</published>
+    <updated>2023-02-20T15:27:53.117Z</updated>
+    
+    <content type="html"><![CDATA[<p>我就不班门弄斧了，直接引用网站文章，很全面</p><p><a href="https://it.cha138.com/shida/show-319358.html">IT常识</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;我就不班门弄斧了，直接引用网站文章，很全面&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://it.cha138.com/shida/show-319358.html&quot;&gt;IT常识&lt;/a&gt;&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    <category term="md语法" scheme="https://angyuer.com/categories/md%E8%AF%AD%E6%B3%95/"/>
+    
+    
+    <category term="md语法" scheme="https://angyuer.com/tags/md%E8%AF%AD%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>cocos creator使用fairyGui字体默认字体</title>
+    <link href="https://angyuer.com/2023/02/20/%E5%A6%82%E4%BD%95%E5%9C%A8cocos-creator%E4%B8%AD%E4%BD%BF%E7%94%A8fairyGui%E4%B8%AD%E4%BD%BF%E7%94%A8%E9%BB%98%E8%AE%A4%E5%AD%97%E4%BD%93/"/>
+    <id>https://angyuer.com/2023/02/20/%E5%A6%82%E4%BD%95%E5%9C%A8cocos-creator%E4%B8%AD%E4%BD%BF%E7%94%A8fairyGui%E4%B8%AD%E4%BD%BF%E7%94%A8%E9%BB%98%E8%AE%A4%E5%AD%97%E4%BD%93/</id>
+    <published>2023-02-20T14:59:14.000Z</published>
+    <updated>2023-02-20T15:32:42.825Z</updated>
+    
+    <content type="html"><![CDATA[<p>参考了 面圈网写的知识点，得出使用方法</p><p><a href="https://www.mianshigee.com/tutorial/fairygui/ee8ab16c99157b9e.md">面圈网</a></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var aFont = await Framework.ResLoader.loadBundleAnyAsync(GameConst.BundleName.preload, &quot;font/BadComic-Regular&quot;, Font)</span><br><span class="line">fgui.registerFont(&#x27;BadComic-Regular&#x27;, aFont);</span><br><span class="line">fgui.UIConfig.defaultFont = &#x27;BadComic-Regular&#x27;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;参考了 面圈网写的知识点，得出使用方法&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.mianshigee.com/tutorial/fairygui/ee8ab16c99157b9e.md&quot;&gt;面圈网&lt;/a&gt;&lt;/p&gt;
+&lt;figure class=&quot;highligh</summary>
+      
+    
+    
+    
+    <category term="cocos creator" scheme="https://angyuer.com/categories/cocos-creator/"/>
+    
+    <category term="fairyGui" scheme="https://angyuer.com/categories/cocos-creator/fairyGui/"/>
+    
+    
+    <category term="cocos creator" scheme="https://angyuer.com/tags/cocos-creator/"/>
+    
+    <category term="fairyGui" scheme="https://angyuer.com/tags/fairyGui/"/>
+    
+  </entry>
+  
+  <entry>
     <title>我的第一篇博客文章</title>
     <link href="https://angyuer.com/2023/02/19/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/"/>
     <id>https://angyuer.com/2023/02/19/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/</id>
     <published>2023-02-19T11:52:42.000Z</published>
-    <updated>2023-02-19T14:59:57.706Z</updated>
+    <updated>2023-02-20T15:09:07.301Z</updated>
     
+    <content type="html"><![CDATA[<p>纪念一下自己的博客创建成功，之后有时间记录下自己建站的过程，以及参考的大佬的博客</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;纪念一下自己的博客创建成功，之后有时间记录下自己建站的过程，以及参考的大佬的博客&lt;/p&gt;
+</summary>
+      
     
     
     

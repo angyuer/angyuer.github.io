@@ -2,6 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://angyuer.com/2023/02/20/%E5%A6%82%E4%BD%95%E5%9C%A8cocos-creator%E4%B8%AD%E4%BD%BF%E7%94%A8fairyGui%E4%B8%AD%E4%BD%BF%E7%94%A8%E9%BB%98%E8%AE%A4%E5%AD%97%E4%BD%93/</loc>
+    
+    <lastmod>2023-02-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://angyuer.com/2023/02/20/md%E6%96%87%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%B8%B8%E7%94%A8%E7%BC%96%E5%86%99%E8%AF%AD%E6%B3%95/</loc>
+    
+    <lastmod>2023-02-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://angyuer.com/2023/02/19/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/</loc>
+    
+    <lastmod>2023-02-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://angyuer.com/movies/index.html</loc>
     
     <lastmod>2023-02-19</lastmod>
@@ -21,15 +48,6 @@
   
   <url>
     <loc>https://angyuer.com/archives/index.html</loc>
-    
-    <lastmod>2023-02-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://angyuer.com/2023/02/19/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/</loc>
     
     <lastmod>2023-02-19</lastmod>
     
@@ -76,22 +94,43 @@
 
   <url>
     <loc>https://angyuer.com/</loc>
-    <lastmod>2023-02-19</lastmod>
+    <lastmod>2023-02-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
+    <loc>https://angyuer.com/tags/cocos-creator/</loc>
+    <lastmod>2023-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://angyuer.com/tags/fairyGui/</loc>
+    <lastmod>2023-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://angyuer.com/tags/md%E8%AF%AD%E6%B3%95/</loc>
+    <lastmod>2023-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://angyuer.com/tags/%E9%BB%98%E8%AE%A4/</loc>
-    <lastmod>2023-02-19</lastmod>
+    <lastmod>2023-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://angyuer.com/tags/%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2023-02-19</lastmod>
+    <lastmod>2023-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -99,8 +138,29 @@
 
   
   <url>
+    <loc>https://angyuer.com/categories/cocos-creator/</loc>
+    <lastmod>2023-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://angyuer.com/categories/md%E8%AF%AD%E6%B3%95/</loc>
+    <lastmod>2023-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://angyuer.com/categories/%E6%97%A5%E5%B8%B8/</loc>
-    <lastmod>2023-02-19</lastmod>
+    <lastmod>2023-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://angyuer.com/categories/cocos-creator/fairyGui/</loc>
+    <lastmod>2023-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
