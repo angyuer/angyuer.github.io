@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://angyuer.com/music/index.html</loc>
+    
+    <lastmod>2023-02-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://angyuer.com/images/index.html</loc>
     
     <lastmod>2023-02-25</lastmod>
@@ -75,15 +84,6 @@
   
   <url>
     <loc>https://angyuer.com/movies/index.html</loc>
-    
-    <lastmod>2023-02-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://angyuer.com/music/index.html</loc>
     
     <lastmod>2023-02-19</lastmod>
     
