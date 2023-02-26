@@ -32,6 +32,19 @@
       </tags>
   </entry>
   <entry>
+    <title>我的第一篇博客文章</title>
+    <url>/2023/02/19/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/</url>
+    <content><![CDATA[<p>纪念一下自己的博客创建成功，之后有时间记录下自己建站的过程，以及参考的大佬的博客</p>
+]]></content>
+      <categories>
+        <category>日常</category>
+      </categories>
+      <tags>
+        <tag>默认</tag>
+        <tag>记录</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>cocos creator使用fairyGui字体默认字体</title>
     <url>/2023/02/20/%E5%A6%82%E4%BD%95%E5%9C%A8cocos-creator%E4%B8%AD%E4%BD%BF%E7%94%A8fairyGui%E4%B8%AD%E4%BD%BF%E7%94%A8%E9%BB%98%E8%AE%A4%E5%AD%97%E4%BD%93/</url>
     <content><![CDATA[<p>参考了 面圈网写的知识点，得出使用方法</p>
@@ -44,19 +57,6 @@
       <tags>
         <tag>cocos creator</tag>
         <tag>fairyGui</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>我的第一篇博客文章</title>
-    <url>/2023/02/19/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/</url>
-    <content><![CDATA[<p>纪念一下自己的博客创建成功，之后有时间记录下自己建站的过程，以及参考的大佬的博客</p>
-]]></content>
-      <categories>
-        <category>日常</category>
-      </categories>
-      <tags>
-        <tag>默认</tag>
-        <tag>记录</tag>
       </tags>
   </entry>
 </search>
