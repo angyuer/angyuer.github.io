@@ -1,10 +1,43 @@
-- class_name: 友情鏈接
+- class_name: 友情链接
   class_desc: 那些人，那些事
   link_list:
     - name: Hexo
       link: https://hexo.io/zh-tw/
       avatar: https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg
-      descr: 快速、簡單且強大的網誌框架
+      descr: 快速、简洁且高效的博客框架
+
+- class_name: 主题作者
+  link_list:
+    - name: Jerry
+      link: https://hexo.io/zh-tw/
+      avatar: https://butterfly.js.org/img/avatar.png
+      descr: 今日事，今日毕
+
+- class_name: 参考大佬主题博客
+  link_list:
+    - name: Sunny
+      link: https://codersunny.com/
+      avatar: https://codersunny.com/img/avatar.png
+      descr: 自信且温和，温和且坚定
+
+- class_name: Unity3D
+  link_list:
+    - name: 陆泽西 (Jesse Lu)
+      link: http://www.luzexi.com/tag/Unity3D/
+      avatar: https://avatars.githubusercontent.com/u/4043239?v=4
+      descr: Keep moving never stop
+
+
+- class_name: 工具网站
+  link_list:
+    - name: Webgradients
+      link: https://webgradients.com/
+      avatar: https://webgradients.com/img/other/logos/webgradients_logo.png
+      descr: 渐变配色灵感
+    - name: FontAwesome
+      link: https://fontawesome.com/icons
+      avatar: https://fontawesome.com/images/favicon/icon.svg
+      descr: 字体图标
 
 - class_name: 網站
   class_desc: 值得推薦的網站

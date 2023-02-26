@@ -6,6 +6,8 @@ tags:
 categories:
     - md语法
 cover:
+top_img:
+    - https://api.likepoems.com/img/mc
 ---
 
 我就不班门弄斧了，直接引用网站文章，很全面
