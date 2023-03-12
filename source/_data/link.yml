@@ -13,12 +13,21 @@
       avatar: https://butterfly.js.org/img/avatar.png
       descr: 今日事，今日毕
 
+
 - class_name: 参考大佬主题博客
   link_list:
     - name: Sunny
       link: https://codersunny.com/
       avatar: https://codersunny.com/img/avatar.png
       descr: 自信且温和，温和且坚定
+    - name: Fomalhaut
+      link: https://www.fomal.cc/
+      avatar: https://lskypro.acozycotage.net/LightPicture/2022/12/60e5d4e39da7c077.webp
+      descr: Welcome to Fomalhaut🥝のTiny Home!🤣
+    - name: Butterfly主题美化教程
+      link: https://butterfly.zhheo.com/
+      avatar: https://butterfly.zhheo.com/favicon.png
+      descr: 让每个人轻松的自定义自己的博客
 
 - class_name: Unity3D
   link_list:
