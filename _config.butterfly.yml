@@ -107,7 +107,7 @@ avatar:
 disable_top_img: false # 如果不需要展示顶部图 设置为true
 
 # The banner image of home page
-index_img: https://api.likepoems.com/img/mc # 主页的top_img
+index_img: https://angyublog.oss-cn-hangzhou.aliyuncs.com/wallpaper/wallpaper_15.png # 主页的top_img
 
 # If the banner of page not setting, it will show the top_img
 default_top_img: /images/default_post_cover.png # 默认的顶部图 如果top_img没有配置时，会显示default_top_img

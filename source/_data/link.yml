@@ -39,6 +39,10 @@
 
 - class_name: 工具网站
   link_list:
+    - name: Wallhaven
+      link: https://wallhaven.cc/
+      avatar: https://wallhaven.cc/images/layout/logo.png
+      descr: 墙纸
     - name: Webgradients
       link: https://webgradients.com/
       avatar: https://webgradients.com/img/other/logos/webgradients_logo.png
@@ -47,6 +51,10 @@
       link: https://fontawesome.com/icons
       avatar: https://fontawesome.com/images/favicon/icon.svg
       descr: 字体图标
+    - name: Aapp-Icon-Generate
+      link: https://toool.top/app-icon-generate
+      avatar: https://toool.top/favicon.ico
+      descr: 应用图标一键生成工具
 
 - class_name: 網站
   class_desc: 值得推薦的網站
