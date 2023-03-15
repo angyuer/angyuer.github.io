@@ -19,6 +19,221 @@
 ]]></content>
   </entry>
   <entry>
+    <title>markdown语法</title>
+    <url>/2023/02/20/md%E6%96%87%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%B8%B8%E7%94%A8%E7%BC%96%E5%86%99%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<p><a href="https://it.cha138.com/shida/show-319358.html">IT常识</a></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>.md即markdown文件的基本常用编写语法，是一种快速标记、快速排版语言，现在很多前端项目中的说明文件readme等都是用.md文件编写的，而且很多企业也在鼓励使用这种编辑方式。下面就简单和大家分享一些.md基本语法。</p>
+<h1 id="一、基本符号：-gt"><a href="#一、基本符号：-gt" class="headerlink" title="一、基本符号： *-+.&gt;"></a>一、基本符号： *-+.&gt;</h1><p>1.前面带#号，后面带文字，分别表示h1-h6，只到h6，而且h1下面会有一条横线</p>
+<p>示例：</p>
+<table><tr><td bgcolor="edf0f1">
+
+<p>1 # 一级标题<br>2 ## 二级标题<br>3 ### 三级标题<br>4 #### 四级标题<br>5 ##### 五级标题<br>6 ###### 六级标题</p>
+</td></tr></table>
+
+<p>2、标签闭合</p>
+<p>示例：</p>
+<table><tr><td bgcolor="edf0f1">
+
+<p>1 # 一级标题 #<br>2 ## 二级标题 ##<br>3 ### 三级标题 ###<br>4 #### 四级标题 ####<br>5 ##### 五级标题 #####<br>6 ###### 六级标题 ######</p>
+</td></tr></table>
+
+<p>效果如下：</p>
+<h1 id="这是一级标题"><a href="#这是一级标题" class="headerlink" title="这是一级标题"></a>这是一级标题</h1><h2 id="这是二级标题"><a href="#这是二级标题" class="headerlink" title="这是二级标题"></a>这是二级标题</h2><h3 id="这是三级标题"><a href="#这是三级标题" class="headerlink" title="这是三级标题"></a>这是三级标题</h3><h4 id="这是四级标题"><a href="#这是四级标题" class="headerlink" title="这是四级标题"></a>这是四级标题</h4><h5 id="这是五级标题"><a href="#这是五级标题" class="headerlink" title="这是五级标题"></a>这是五级标题</h5><h6 id="这是六级标题"><a href="#这是六级标题" class="headerlink" title="这是六级标题"></a>这是六级标题</h6><h1 id="二、字体"><a href="#二、字体" class="headerlink" title="二、字体"></a>二、字体</h1><p>斜体：要倾斜的文字左右分别<em>号包起来<br>加粗：要加粗的文字左右分别用两个</em>号包起来<br>斜体加粗：要倾斜和加粗的文字左右分别用三个*号包起来<br>删除线：要加删除线的文字左右分别用两个～～号包起来</p>
+<p>示例：</p>
+<table><tr><td bgcolor="edf0f1">
+
+<p>1 <em>斜体文字</em><br>2 <strong>加粗文字</strong><br>3 <em><strong>斜体加粗文字</strong></em><br>4 ～～删除线文字～～</p>
+</td></tr></table>
+
+<p>效果如下：<br><em>斜体文字</em><br><strong>加粗文字</strong><br><em><strong>斜体加粗文字</strong></em><br><del>删除线文字</del></p>
+<h1 id="三、引用"><a href="#三、引用" class="headerlink" title="三、引用"></a>三、引用</h1><p>在饮用的文字前加&gt;即可。饮用也可以嵌套，如加两个&gt;&gt;三个&gt;&gt;&gt;<br>n个…<br>貌似可以一直加下去，但没什么卵用</p>
+<p>示例：</p>
+<table><tr><td bgcolor="edf0f1">
+
+<p>1 &gt;这是引用的内容<br>2 &gt;&gt;这是引用的内容<br>3 &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;这是引用的内容</p>
+</td></tr></table>
+
+<p>效果如下：</p>
+<blockquote>
+<p>这是引用的内容</p>
+<blockquote>
+<p>这是引用的内容</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>这是引用的内容</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<h1 id="四、分割线"><a href="#四、分割线" class="headerlink" title="四、分割线"></a>四、分割线</h1><p>三个或者三个以上的 - 或者 * 都可以。</p>
+<p>示例：</p>
+<table><tr><td bgcolor="edf0f1">
+
+<p>1 —<br>2 —-<br>3 ***<br>4 ****</p>
+</td></tr></table>
+
+<h2 id="效果如下："><a href="#效果如下：" class="headerlink" title="效果如下："></a>效果如下：</h2><hr>
+<hr>
+<hr>
+<h1 id="五、图片"><a href="#五、图片" class="headerlink" title="五、图片"></a>五、图片</h1><p>语法：</p>
+<table><tr><td bgcolor="edf0f1">
+
+<p>1 ![图片alt](图片地址 ‘‘图片title‘‘)<br>2<br>3 图片alt就是显示在图片下面的文字，相当于对图片内容的解释。<br>4 图片title是图片的标题，当鼠标移到图片上时显示的内容。title可加可不加</p>
+</td></tr></table>
+
+<p>示例：</p>
+<table><tr><td bgcolor="edf0f1">
+
+<p><img src="https://angyublog.oss-cn-hangzhou.aliyuncs.com/wallpaper/wallpaper_21.jpg" alt="墙纸" title="昂予壁纸库21"></p>
+</td></tr></table>
+
+<p>效果如下：</p>
+<table><tr><td bgcolor="edf0f1">
+
+<p><img src="https://angyublog.oss-cn-hangzhou.aliyuncs.com/wallpaper/wallpaper_20.jpg" alt="墙纸" title="昂予壁纸库20"></p>
+</td></tr></table>
+
+<h1 id="六、超链接"><a href="#六、超链接" class="headerlink" title="六、超链接"></a>六、超链接</h1><p>语法：</p>
+<table><tr><td bgcolor="edf0f1">
+
+<p>1 <a href="%E8%B6%85%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80" title="超链接title">超链接名</a><br>2 title可加可不加</p>
+</td></tr></table>
+
+<p>示例：</p>
+<table><tr><td bgcolor="edf0f1">
+
+<p>⚠️注意：[]后边不应该加空格，这里是为了演示<br>1 [IT常识] (<a href="https://it.cha138.com/shida/show-319358.html">https://it.cha138.com/shida/show-319358.html</a>)<br>2 [昂予] (<a href="http://www.angyuer.com/">http://www.angyuer.com</a>)</p>
+</td></tr></table>
+
+<p>效果如下：<br><a href="https://it.cha138.com/shida/show-319358.html">IT常识</a><br><a href="http://www.angyuer.com/">昂予’s Blog</a></p>
+<h1 id="七、列表"><a href="#七、列表" class="headerlink" title="七、列表"></a>七、列表</h1><h2 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h2><p>语法：<br>无序列表用 - + * 任何一种都可以</p>
+<table><tr><td bgcolor="edf0f1">
+
+<p>注意：- + * 跟内容之间都要有一个空格<br>1 - 列表内容<br>2 + 列表内容<br>3 * 列表内容</p>
+</td></tr></table>
+
+<p>效果如下：</p>
+<table><tr><td bgcolor="edf0f1">
+
+<ul>
+<li>列表内容</li>
+</ul>
+<ul>
+<li>列表内容</li>
+</ul>
+<ul>
+<li>列表内容</li>
+</ul>
+</td></tr></table>
+
+<h2 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h2><p>语法：<br>数字加点</p>
+<table><tr><td bgcolor="edf0f1">
+
+<p>注意：序号跟内容之间要有空格<br>1 1. 列表内容<br>2 2. 列表内容<br>3 3. 列表内容</p>
+</td></tr></table>
+
+<p>效果如下：</p>
+<table><tr><td bgcolor="edf0f1">
+
+<ol>
+<li>列表内容</li>
+<li>列表内容</li>
+<li>列表内容</li>
+</ol>
+</td></tr></table>
+
+<h2 id="列表嵌套"><a href="#列表嵌套" class="headerlink" title="列表嵌套"></a>列表嵌套</h2><p>语法：<br>需在子列表中的选项前面添加四个空格</p>
+<p>效果如下：</p>
+<table><tr><td bgcolor="edf0f1">
+
+<ol>
+<li>第一项：<ul>
+<li>第一项嵌套的第一个元素</li>
+<li>第一项嵌套的第二个元素</li>
+</ul>
+</li>
+<li>第二项：<ul>
+<li>第二项嵌套的第一个元素</li>
+<li>第二项嵌套的第二个元素</li>
+</ul>
+</li>
+</ol>
+</td></tr></table>
+
+<h1 id="八、表格"><a href="#八、表格" class="headerlink" title="八、表格"></a>八、表格</h1><p>语法：</p>
+<table><tr><td bgcolor="edf0f1">
+
+<p> 1 表头|表头|表头<br> 2 —|:–:|—:<br> 3 内容|内容|内容<br> 4 内容|内容|内容<br> 5<br> 6 第二行分割表头和内容。<br> 7 - 有一个就行，为了对齐，多加了几个<br> 8 文字默认居左<br> 9 -两边加：表示文字居中<br>10 -右边加：表示文字居右<br>11 注：原生的语法两边都要用 | 包起来。此处省略</p>
+</td></tr></table>
+
+<p>示例：</p>
+<table><tr><td bgcolor="edf0f1">
+
+<p>1 姓名|技能|排行<br>2 –|:–:|–:<br>3 刘备|哭|大哥<br>4 关羽|打|二哥<br>5 张飞|骂|三弟</p>
+</td></tr></table>
+
+<p>效果如下：</p>
+<table><tr><td bgcolor="edf0f1">
+
+<table>
+<thead>
+<tr>
+<th>姓名</th>
+<th align="center">技能</th>
+<th align="right">排行</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>刘备</td>
+<td align="center">哭</td>
+<td align="right">大哥</td>
+</tr>
+<tr>
+<td>关羽</td>
+<td align="center">打</td>
+<td align="right">二哥</td>
+</tr>
+<tr>
+<td>张飞</td>
+<td align="center">骂</td>
+<td align="right">三弟</td>
+</tr>
+</tbody></table>
+</td></tr></table>
+
+
+<h1 id="九、代码"><a href="#九、代码" class="headerlink" title="九、代码"></a>九、代码</h1><p>语法：<br>单行代码：代码之间分别用一个反引号包起来<br>代码块：代码之间分别用三个反引号包起来，且两边的反引号单独占一行</p>
+<p>效果如下：</p>
+<p>单行代码<br><code>create database hero;</code></p>
+<p>代码块</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function fun()&#123;</span><br><span class="line">     echo &quot;这是一句非常牛逼的代码&quot;;</span><br><span class="line">&#125;</span><br><span class="line">fun();</span><br></pre></td></tr></table></figure>
+
+<h1 id="十、流程图"><a href="#十、流程图" class="headerlink" title="十、流程图"></a>十、流程图</h1><p>TODO:<br>    暂时不清楚为什么在md文件中显示不出来流程图，<br>    只能通过Markdown Preview Enhanced 插件预览打开，然后再右键生成html生成无题的html文件在博客中显示。</p>
+<table><tr><td bgcolor="edf0f1">
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">st=&gt;start: 页面加载</span><br><span class="line">e=&gt;end: End:&gt;http://www.google.com</span><br><span class="line">op1=&gt;operation: get_hotel_ids|past</span><br><span class="line">op2=&gt;operation: get_proxy|current</span><br><span class="line">sub1=&gt;subroutine: get_proxy|current</span><br><span class="line">op3=&gt;operation: save_comment|current</span><br><span class="line">op4=&gt;operation: set_sentiment|current</span><br><span class="line">op5=&gt;operation: set_record|current</span><br><span class="line">cond1=&gt;condition: ids_remain空?</span><br><span class="line">cond2=&gt;condition: proxy_list空?</span><br><span class="line">cond3=&gt;condition: ids_got空?</span><br><span class="line">cond4=&gt;condition: 爬取成功??</span><br><span class="line">cond5=&gt;condition: ids_remain空?</span><br><span class="line">io1=&gt;inputoutput: ids-remain</span><br><span class="line">io2=&gt;inputoutput: proxy_list</span><br><span class="line">io3=&gt;inputoutput: ids-got</span><br><span class="line">st-&gt;op1(right)-&gt;io1-&gt;cond1</span><br><span class="line">cond1(yes)-&gt;sub1-&gt;io2-&gt;cond2</span><br><span class="line">cond2(no)-&gt;op3</span><br><span class="line">cond2(yes)-&gt;sub1</span><br><span class="line">cond1(no)-&gt;op3-&gt;cond4</span><br><span class="line">cond4(yes)-&gt;io3-&gt;cond3</span><br><span class="line">cond4(no)-&gt;io1</span><br><span class="line">cond3(no)-&gt;op4</span><br><span class="line">cond3(yes, right)-&gt;cond5</span><br><span class="line">cond5(yes)-&gt;op5</span><br><span class="line">cond5(no)-&gt;cond3</span><br><span class="line">op5-&gt;e</span><br></pre></td></tr></table></figure>
+
+</td></tr></table>]]></content>
+      <categories>
+        <category>markdown</category>
+      </categories>
+      <tags>
+        <tag>markdown</tag>
+      </tags>
+  </entry>
+  <entry>
     <title></title>
     <url>/2023/03/13/md%E6%96%87%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%B8%B8%E7%94%A8%E7%BC%96%E5%86%99%E8%AF%AD%E6%B3%95/</url>
     <content><![CDATA[<!DOCTYPE html><html><head>
@@ -610,221 +825,6 @@ for (var i = 0; i < flowcharts.length; i++) {
     
   
     </body></html>]]></content>
-  </entry>
-  <entry>
-    <title>markdown语法</title>
-    <url>/2023/02/20/md%E6%96%87%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%B8%B8%E7%94%A8%E7%BC%96%E5%86%99%E8%AF%AD%E6%B3%95/</url>
-    <content><![CDATA[<p><a href="https://it.cha138.com/shida/show-319358.html">IT常识</a></p>
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>.md即markdown文件的基本常用编写语法，是一种快速标记、快速排版语言，现在很多前端项目中的说明文件readme等都是用.md文件编写的，而且很多企业也在鼓励使用这种编辑方式。下面就简单和大家分享一些.md基本语法。</p>
-<h1 id="一、基本符号：-gt"><a href="#一、基本符号：-gt" class="headerlink" title="一、基本符号： *-+.&gt;"></a>一、基本符号： *-+.&gt;</h1><p>1.前面带#号，后面带文字，分别表示h1-h6，只到h6，而且h1下面会有一条横线</p>
-<p>示例：</p>
-<table><tr><td bgcolor="edf0f1">
-
-<p>1 # 一级标题<br>2 ## 二级标题<br>3 ### 三级标题<br>4 #### 四级标题<br>5 ##### 五级标题<br>6 ###### 六级标题</p>
-</td></tr></table>
-
-<p>2、标签闭合</p>
-<p>示例：</p>
-<table><tr><td bgcolor="edf0f1">
-
-<p>1 # 一级标题 #<br>2 ## 二级标题 ##<br>3 ### 三级标题 ###<br>4 #### 四级标题 ####<br>5 ##### 五级标题 #####<br>6 ###### 六级标题 ######</p>
-</td></tr></table>
-
-<p>效果如下：</p>
-<h1 id="这是一级标题"><a href="#这是一级标题" class="headerlink" title="这是一级标题"></a>这是一级标题</h1><h2 id="这是二级标题"><a href="#这是二级标题" class="headerlink" title="这是二级标题"></a>这是二级标题</h2><h3 id="这是三级标题"><a href="#这是三级标题" class="headerlink" title="这是三级标题"></a>这是三级标题</h3><h4 id="这是四级标题"><a href="#这是四级标题" class="headerlink" title="这是四级标题"></a>这是四级标题</h4><h5 id="这是五级标题"><a href="#这是五级标题" class="headerlink" title="这是五级标题"></a>这是五级标题</h5><h6 id="这是六级标题"><a href="#这是六级标题" class="headerlink" title="这是六级标题"></a>这是六级标题</h6><h1 id="二、字体"><a href="#二、字体" class="headerlink" title="二、字体"></a>二、字体</h1><p>斜体：要倾斜的文字左右分别<em>号包起来<br>加粗：要加粗的文字左右分别用两个</em>号包起来<br>斜体加粗：要倾斜和加粗的文字左右分别用三个*号包起来<br>删除线：要加删除线的文字左右分别用两个～～号包起来</p>
-<p>示例：</p>
-<table><tr><td bgcolor="edf0f1">
-
-<p>1 <em>斜体文字</em><br>2 <strong>加粗文字</strong><br>3 <em><strong>斜体加粗文字</strong></em><br>4 ～～删除线文字～～</p>
-</td></tr></table>
-
-<p>效果如下：<br><em>斜体文字</em><br><strong>加粗文字</strong><br><em><strong>斜体加粗文字</strong></em><br><del>删除线文字</del></p>
-<h1 id="三、引用"><a href="#三、引用" class="headerlink" title="三、引用"></a>三、引用</h1><p>在饮用的文字前加&gt;即可。饮用也可以嵌套，如加两个&gt;&gt;三个&gt;&gt;&gt;<br>n个…<br>貌似可以一直加下去，但没什么卵用</p>
-<p>示例：</p>
-<table><tr><td bgcolor="edf0f1">
-
-<p>1 &gt;这是引用的内容<br>2 &gt;&gt;这是引用的内容<br>3 &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;这是引用的内容</p>
-</td></tr></table>
-
-<p>效果如下：</p>
-<blockquote>
-<p>这是引用的内容</p>
-<blockquote>
-<p>这是引用的内容</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>这是引用的内容</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<h1 id="四、分割线"><a href="#四、分割线" class="headerlink" title="四、分割线"></a>四、分割线</h1><p>三个或者三个以上的 - 或者 * 都可以。</p>
-<p>示例：</p>
-<table><tr><td bgcolor="edf0f1">
-
-<p>1 —<br>2 —-<br>3 ***<br>4 ****</p>
-</td></tr></table>
-
-<h2 id="效果如下："><a href="#效果如下：" class="headerlink" title="效果如下："></a>效果如下：</h2><hr>
-<hr>
-<hr>
-<h1 id="五、图片"><a href="#五、图片" class="headerlink" title="五、图片"></a>五、图片</h1><p>语法：</p>
-<table><tr><td bgcolor="edf0f1">
-
-<p>1 ![图片alt](图片地址 ‘‘图片title‘‘)<br>2<br>3 图片alt就是显示在图片下面的文字，相当于对图片内容的解释。<br>4 图片title是图片的标题，当鼠标移到图片上时显示的内容。title可加可不加</p>
-</td></tr></table>
-
-<p>示例：</p>
-<table><tr><td bgcolor="edf0f1">
-
-<p><img src="https://angyublog.oss-cn-hangzhou.aliyuncs.com/wallpaper/wallpaper_21.jpg" alt="墙纸" title="昂予壁纸库21"></p>
-</td></tr></table>
-
-<p>效果如下：</p>
-<table><tr><td bgcolor="edf0f1">
-
-<p><img src="https://angyublog.oss-cn-hangzhou.aliyuncs.com/wallpaper/wallpaper_20.jpg" alt="墙纸" title="昂予壁纸库20"></p>
-</td></tr></table>
-
-<h1 id="六、超链接"><a href="#六、超链接" class="headerlink" title="六、超链接"></a>六、超链接</h1><p>语法：</p>
-<table><tr><td bgcolor="edf0f1">
-
-<p>1 <a href="%E8%B6%85%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80" title="超链接title">超链接名</a><br>2 title可加可不加</p>
-</td></tr></table>
-
-<p>示例：</p>
-<table><tr><td bgcolor="edf0f1">
-
-<p>⚠️注意：[]后边不应该加空格，这里是为了演示<br>1 [IT常识] (<a href="https://it.cha138.com/shida/show-319358.html">https://it.cha138.com/shida/show-319358.html</a>)<br>2 [昂予] (<a href="http://www.angyuer.com/">http://www.angyuer.com</a>)</p>
-</td></tr></table>
-
-<p>效果如下：<br><a href="https://it.cha138.com/shida/show-319358.html">IT常识</a><br><a href="http://www.angyuer.com/">昂予’s Blog</a></p>
-<h1 id="七、列表"><a href="#七、列表" class="headerlink" title="七、列表"></a>七、列表</h1><h2 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h2><p>语法：<br>无序列表用 - + * 任何一种都可以</p>
-<table><tr><td bgcolor="edf0f1">
-
-<p>注意：- + * 跟内容之间都要有一个空格<br>1 - 列表内容<br>2 + 列表内容<br>3 * 列表内容</p>
-</td></tr></table>
-
-<p>效果如下：</p>
-<table><tr><td bgcolor="edf0f1">
-
-<ul>
-<li>列表内容</li>
-</ul>
-<ul>
-<li>列表内容</li>
-</ul>
-<ul>
-<li>列表内容</li>
-</ul>
-</td></tr></table>
-
-<h2 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h2><p>语法：<br>数字加点</p>
-<table><tr><td bgcolor="edf0f1">
-
-<p>注意：序号跟内容之间要有空格<br>1 1. 列表内容<br>2 2. 列表内容<br>3 3. 列表内容</p>
-</td></tr></table>
-
-<p>效果如下：</p>
-<table><tr><td bgcolor="edf0f1">
-
-<ol>
-<li>列表内容</li>
-<li>列表内容</li>
-<li>列表内容</li>
-</ol>
-</td></tr></table>
-
-<h2 id="列表嵌套"><a href="#列表嵌套" class="headerlink" title="列表嵌套"></a>列表嵌套</h2><p>语法：<br>需在子列表中的选项前面添加四个空格</p>
-<p>效果如下：</p>
-<table><tr><td bgcolor="edf0f1">
-
-<ol>
-<li>第一项：<ul>
-<li>第一项嵌套的第一个元素</li>
-<li>第一项嵌套的第二个元素</li>
-</ul>
-</li>
-<li>第二项：<ul>
-<li>第二项嵌套的第一个元素</li>
-<li>第二项嵌套的第二个元素</li>
-</ul>
-</li>
-</ol>
-</td></tr></table>
-
-<h1 id="八、表格"><a href="#八、表格" class="headerlink" title="八、表格"></a>八、表格</h1><p>语法：</p>
-<table><tr><td bgcolor="edf0f1">
-
-<p> 1 表头|表头|表头<br> 2 —|:–:|—:<br> 3 内容|内容|内容<br> 4 内容|内容|内容<br> 5<br> 6 第二行分割表头和内容。<br> 7 - 有一个就行，为了对齐，多加了几个<br> 8 文字默认居左<br> 9 -两边加：表示文字居中<br>10 -右边加：表示文字居右<br>11 注：原生的语法两边都要用 | 包起来。此处省略</p>
-</td></tr></table>
-
-<p>示例：</p>
-<table><tr><td bgcolor="edf0f1">
-
-<p>1 姓名|技能|排行<br>2 –|:–:|–:<br>3 刘备|哭|大哥<br>4 关羽|打|二哥<br>5 张飞|骂|三弟</p>
-</td></tr></table>
-
-<p>效果如下：</p>
-<table><tr><td bgcolor="edf0f1">
-
-<table>
-<thead>
-<tr>
-<th>姓名</th>
-<th align="center">技能</th>
-<th align="right">排行</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>刘备</td>
-<td align="center">哭</td>
-<td align="right">大哥</td>
-</tr>
-<tr>
-<td>关羽</td>
-<td align="center">打</td>
-<td align="right">二哥</td>
-</tr>
-<tr>
-<td>张飞</td>
-<td align="center">骂</td>
-<td align="right">三弟</td>
-</tr>
-</tbody></table>
-</td></tr></table>
-
-
-<h1 id="九、代码"><a href="#九、代码" class="headerlink" title="九、代码"></a>九、代码</h1><p>语法：<br>单行代码：代码之间分别用一个反引号包起来<br>代码块：代码之间分别用三个反引号包起来，且两边的反引号单独占一行</p>
-<p>效果如下：</p>
-<p>单行代码<br><code>create database hero;</code></p>
-<p>代码块</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function fun()&#123;</span><br><span class="line">     echo &quot;这是一句非常牛逼的代码&quot;;</span><br><span class="line">&#125;</span><br><span class="line">fun();</span><br></pre></td></tr></table></figure>
-
-<h1 id="十、流程图"><a href="#十、流程图" class="headerlink" title="十、流程图"></a>十、流程图</h1><p>TODO:<br>    暂时不清楚为什么在md文件中显示不出来流程图，<br>    只能通过Markdown Preview Enhanced 插件预览打开，然后再右键生成html生成无题的html文件在博客中显示。</p>
-<table><tr><td bgcolor="edf0f1">
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">st=&gt;start: 页面加载</span><br><span class="line">e=&gt;end: End:&gt;http://www.google.com</span><br><span class="line">op1=&gt;operation: get_hotel_ids|past</span><br><span class="line">op2=&gt;operation: get_proxy|current</span><br><span class="line">sub1=&gt;subroutine: get_proxy|current</span><br><span class="line">op3=&gt;operation: save_comment|current</span><br><span class="line">op4=&gt;operation: set_sentiment|current</span><br><span class="line">op5=&gt;operation: set_record|current</span><br><span class="line">cond1=&gt;condition: ids_remain空?</span><br><span class="line">cond2=&gt;condition: proxy_list空?</span><br><span class="line">cond3=&gt;condition: ids_got空?</span><br><span class="line">cond4=&gt;condition: 爬取成功??</span><br><span class="line">cond5=&gt;condition: ids_remain空?</span><br><span class="line">io1=&gt;inputoutput: ids-remain</span><br><span class="line">io2=&gt;inputoutput: proxy_list</span><br><span class="line">io3=&gt;inputoutput: ids-got</span><br><span class="line">st-&gt;op1(right)-&gt;io1-&gt;cond1</span><br><span class="line">cond1(yes)-&gt;sub1-&gt;io2-&gt;cond2</span><br><span class="line">cond2(no)-&gt;op3</span><br><span class="line">cond2(yes)-&gt;sub1</span><br><span class="line">cond1(no)-&gt;op3-&gt;cond4</span><br><span class="line">cond4(yes)-&gt;io3-&gt;cond3</span><br><span class="line">cond4(no)-&gt;io1</span><br><span class="line">cond3(no)-&gt;op4</span><br><span class="line">cond3(yes, right)-&gt;cond5</span><br><span class="line">cond5(yes)-&gt;op5</span><br><span class="line">cond5(no)-&gt;cond3</span><br><span class="line">op5-&gt;e</span><br></pre></td></tr></table></figure>
-
-</td></tr></table>]]></content>
-      <categories>
-        <category>markdown</category>
-      </categories>
-      <tags>
-        <tag>markdown</tag>
-      </tags>
   </entry>
   <entry>
     <title>cocos creator使用fairyGui字体默认字体</title>
