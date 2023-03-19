@@ -6,9 +6,7 @@ tags:
     - markdown
 categories:
     - markdown
-cover: null
-top_img:
-    - 'https://api.likepoems.com/img/mc'
+cover: https://angyublog.oss-cn-hangzhou.aliyuncs.com/wallpaper/wallpaper_14.jpg
 ---  
   
   

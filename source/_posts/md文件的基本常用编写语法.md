@@ -1,13 +1,15 @@
 ---
-title: [markdown语法]
-date: 2023-02-20 23:23:30
+title:
+  - markdown语法
 tags:
-    - markdown
+  - markdown
 categories:
-    - markdown
-cover:
-top_img:
-    - https://api.likepoems.com/img/mc
+  - markdown
+# top_img:
+#   - 'https://api.likepoems.com/img/mc'
+abbrlink: f134a8e5
+date: 2023-02-20 23:23:30
+cover: https://angyublog.oss-cn-hangzhou.aliyuncs.com/wallpaper/wallpaper_34.jpg
 ---
 
 [IT常识](https://it.cha138.com/shida/show-319358.html)

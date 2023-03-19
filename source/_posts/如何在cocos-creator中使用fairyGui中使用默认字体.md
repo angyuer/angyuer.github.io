@@ -1,12 +1,14 @@
 ---
 title: cocos creator使用fairyGui字体默认字体
-date: 2023-02-20 22:59:14
 tags:
-    - cocos creator
-    - fairyGui
+  - cocos creator
+  - fairyGui
 categories:
-    - cocos creator
-    - fairyGui
+  - cocos creator
+  - fairyGui
+abbrlink: 5ab84984
+date: 2023-02-20 22:59:14
+cover: https://angyublog.oss-cn-hangzhou.aliyuncs.com/wallpaper/wallpaper_17.jpg
 ---
 
 参考了 面圈网写的知识点，得出使用方法
