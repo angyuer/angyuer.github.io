@@ -9,7 +9,7 @@ categories:
 #   - 'https://api.likepoems.com/img/mc'
 abbrlink: f134a8e5
 date: 2023-02-20 23:23:30
-cover: https://angyublog.oss-cn-hangzhou.aliyuncs.com/wallpaper/wallpaper_34.jpg
+cover: https://angyublog.oss-cn-hangzhou.aliyuncs.com/wallpaper/wallpaper_37.jpg
 ---
 
 [IT常识](https://it.cha138.com/shida/show-319358.html)

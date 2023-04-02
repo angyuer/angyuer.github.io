@@ -45,11 +45,11 @@ copy:
 #   icon: link || the description
 # 书写格式：图标名:url || 描述性文字
 social:
-  iconfont icon-QQ: http://wpa.qq.com/msgrd?v=3&uin=1456353553&site=qq&menu=yes || QQ
-  iconfont icon-weixin: http://wpa.qq.com/msgrd?v=3&uin=1456353553&site=qq&menu=yes || WeChat
-  iconfont icon-github-fill: https://github.com/angyuer || Github
-  iconfont icon-zujian-youxiang: mailto:angyuer@163.com || Email
-  iconfont icon-rss: /atom.xml || RSS链接
+  fab fa-qq: http://wpa.qq.com/msgrd?v=3&uin=1456353553&site=qq&menu=yes || QQ
+  fab fa-weixin: http://wpa.qq.com/msgrd?v=3&uin=1456353553&site=qq&menu=yes || WeChat
+  fab fa-github: https://github.com/angyuer || Github
+  fas fa-envelope: mailto:angyuer@163.com || Email
+  fas fa-rss: /atom.xml || RSS链接
 
 
 # search (搜索)
@@ -288,11 +288,11 @@ addtoany:
 comments:
   # Up to two comments system, the first will be shown as default
   # Choose: Disqus/Disqusjs/Livere/Gitalk/Valine/Waline/Utterances/Facebook Comments/Twikoo/Giscus/Remark42/Artalk
-  use: # Valine,Disqus
+  use: Twikoo # Valine,Disqus
   text: true # Display the comment name next to the button
   # lazyload: The comment system will be load when comment element enters the browser's viewport.
   # If you set it to true, the comment count will be invalid
-  lazyload: false
+  lazyload: true
   count: false # Display comment count in post's top_img
   card_post_count: false # Display comment count in Home Page
 
@@ -366,9 +366,9 @@ facebook_comments:
 # Twikoo
 # https://github.com/imaegoo/twikoo
 twikoo:
-  envId:
+  envId: https://twikoo.angyuer.com/ #一定要https 不要 http
   region:
-  visitor: false
+  visitor: true
   option:
 
 # Giscus
@@ -538,7 +538,7 @@ tag_ui: # 留空或 index
 # Website Background (設置網站背景)
 # can set it to color or image (可設置圖片 或者 顔色)
 # The formal of image: url(http://xxxxxx.com/xxx.jpg)
-background: url(https://angyublog.oss-cn-hangzhou.aliyuncs.com/wallpaper/wallpaper_15.png) # /images/background.png
+background: url(https://angyublog.oss-cn-hangzhou.aliyuncs.com/wallpaper/wallpaper_71.png) # /images/background.png
 
 # Footer Background
 footer_bg: false
@@ -910,6 +910,7 @@ inject:
     - <link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'">
   bottom:
     # - <script src="xxxx"></script>
+    <script async src="/js/title.js"></script>
 
 # CDN
 # Don't modify the following settings unless you know how they work
