@@ -11,7 +11,7 @@ mixin indexPostUI()
         - const cardClass = index === 0 ? 'is-lead' : index === page.posts.data.length - 1 ? 'is-wide' : 'is-compact'
         article.recent-post-item(class=cardClass data-channel=channel)
           a.post-card__cover(href=url_for(link) title=title tabindex='-1' aria-hidden='true')
-            img(src=url_for(cover) alt='' loading=index < 4 ? 'eager' : 'lazy' decoding='async')
+            img(src=url_for(cover) alt='' width='1200' height='675' loading='lazy' fetchpriority='low' decoding='async')
           .recent-post-info
             .article-row-meta
               span.article-index(aria-hidden='true')=String(index + 1).padStart(2, '0')

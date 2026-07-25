@@ -1,8 +1,11 @@
 - const { limit_day, message_prev, message_next, position} = theme.noticeOutdate
 - const notice_data = { limitDay: limit_day, messagePrev: message_prev, messageNext: message_next, postUpdate: full_date(page.updated)}
+- const diff_day = Math.floor((Date.now() - new Date(page.updated).getTime()) / 86400000)
+- const is_outdated = Number.isFinite(diff_day) && diff_day >= limit_day
+- const notice_text = is_outdated ? `${message_prev} ${diff_day} ${message_next}` : ''
 if position === 'top'
-  #post-outdate-notice(data=notice_data hidden)
+  #post-outdate-notice(data=notice_data hidden=!is_outdated)=notice_text
   !=page.content
 else
   !=page.content
-  #post-outdate-notice(data=notice_data hidden)
+  #post-outdate-notice(data=notice_data hidden=!is_outdated)=notice_text

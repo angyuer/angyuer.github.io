@@ -23,6 +23,10 @@ hexo-renderer-stylus → stylus → glob → minimatch → brace-expansion
 npm 当前给出的自动修复方案是把 `hexo-renderer-stylus` 从 `3.0.1` 降到 `0.3.1`，
 会破坏 Hexo 8 和当前主题的兼容性，因此暂不执行。后续在 Stylus 或渲染器提供兼容升级时移除此记录。
 
+性能检查直接使用锁定的 Lighthouse 核心版本和仓库内脚本。没有采用当前稳定版
+`@lhci/cli`，因为它仍依赖存在已知告警的旧版 `tmp`、`rimraf` 和 `uuid`；该选择将
+npm 审计维持在上述 Stylus 构建链范围内。
+
 ## 升级流程
 
 1. 阅读直接依赖的变更日志和 Node.js 兼容范围。

@@ -55,8 +55,9 @@ npm run verify
 ```
 
 该命令会依次检查 Node.js 环境、文章元数据、Hexo 干净构建、HTML/SEO、
-站内链接、静态资源预算和浏览器关键流程。本地冒烟测试使用 Chrome，覆盖首页、
-三个内容频道、搜索、主题切换、移动导航和减少动态模式。
+站内链接、静态资源预算、浏览器关键流程、视觉基线和 Lighthouse。本地浏览器测试
+使用 Chrome，覆盖首页、三个内容频道、搜索、主题切换、频道筛选、代码复制、
+Twikoo 初始化、旧链接、移动导航和减少动态模式。
 
 也可以单独执行：
 
@@ -67,15 +68,26 @@ npm run check:html
 npm run check:links
 npm run check:assets
 npm run test:smoke
+npm run test:visual
+npm run check:lighthouse
 ```
+
+视觉回归会对桌面、平板、手机、浅色、深色和无磨砂滤镜环境进行感知差异比较。
+只有在确认视觉调整符合预期后，才使用 `npm run test:visual:update` 更新基线。
+Lighthouse 使用移动端模拟：首页和文章页 Performance 不低于 85，Accessibility 与
+SEO 不低于 95，Best Practices 不低于 90。HTML 和 JSON 报告写入 `.lighthouseci/`。
 
 ## 图片
 
-文章图片放在 `source/images/posts/<文章标识>/`。JPEG 或 PNG 可以批量生成 WebP 和 AVIF：
+文章图片放在 `source/images/posts/<文章标识>/`。构建会自动把 JPEG 或 PNG 源图增量
+生成为 WebP 和 AVIF；源图不会发布到站点，文章只引用优化后的格式。也可以手动执行：
 
 ```bash
 npm run optimize:images
 ```
+
+源图最大为 8 MiB、4000 万像素；生成图片最长边不超过 2000px，单张不超过
+450 KiB。内容未变化时不会重写已有图片。
 
 首页主视觉的原图保存在 `assets/hero/hero-source.jpg`，更新后执行：
 

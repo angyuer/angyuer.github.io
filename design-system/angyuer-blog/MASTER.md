@@ -46,7 +46,7 @@ The result should feel personal and cinematic without becoming decorative or bus
 - Blur: 28px with moderate saturation, not a flat opaque gray fill.
 - Use a fine light border, a top-edge highlight, and one soft depth shadow.
 - Glass must sit above visible imagery or ambient color so transparency has purpose.
-- Continue the hero image into the page at very low intensity beneath a cool-to-warm neutral wash.
+- Continue below the hero with a cool-to-warm neutral wash and subtle ambient tints; do not download the desktop hero again as a page background.
 - Browsers without backdrop filtering receive an opaque readable fallback.
 
 ## Typography

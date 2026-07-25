@@ -32,6 +32,17 @@ jobs:
       - name: Verify site
         run: npm run verify
 
+      - name: Upload diagnostic reports
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verification-reports
+          path: |
+            test-results
+            .lighthouseci
+          if-no-files-found: ignore
+          retention-days: 7
+
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:

@@ -26,11 +26,14 @@ if !theme.disable_top_img && page.top_img !== false
     - bg_img = getBgPath(top_img)
     - headerClassName = globalPageType === 'home' ? 'full_page' : globalPageType === 'post' ? 'post-bg' : 'not-home-page'
 
-header#page-header(class=`${headerClassName + isFixedClass}` style=bg_img)
+header#page-header(class=`${headerClassName + isFixedClass}` style=globalPageType === 'post' ? '' : bg_img)
   if globalPageType === 'home'
     picture.hero-media(aria-hidden='true')
       source(media='(max-width: 700px)' srcset=url_for('/images/hero/hero-mobile.webp'))
-      img(src=url_for('/images/hero/hero-desktop.webp') alt='' fetchpriority='high' decoding='async' loading='eager')
+      img(src=url_for('/images/hero/hero-desktop.webp') alt='' fetchpriority='high' decoding='sync' loading='eager')
+  else if globalPageType === 'post' && top_img !== false
+    picture.hero-media.post-hero-media(aria-hidden='true')
+      img(src=url_for(top_img) alt='' width='1200' height='675' fetchpriority='high' decoding='sync' loading='eager')
   include ./nav.pug
   if top_img !== false
     if globalPageType === 'post'

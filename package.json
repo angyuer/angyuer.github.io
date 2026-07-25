@@ -9,15 +9,18 @@
   "scripts": {
     "dev": "hexo server --draft",
     "server": "hexo server",
-    "build": "npm run sync:vendor && npm run check && hexo clean && hexo generate",
+    "build": "npm run sync:vendor && npm run optimize:images && npm run check && hexo clean && hexo generate",
     "clean": "hexo clean",
     "check": "node tools/check-content.mjs",
     "check:env": "node tools/check-env.mjs",
     "check:html": "node tools/check-html.mjs public",
     "check:links": "node tools/check-links.mjs public",
     "check:assets": "node tools/check-assets.mjs public",
-    "test:smoke": "playwright test",
-    "verify": "npm run check:env && npm run build && npm run check:html && npm run check:links && npm run check:assets && npm run test:smoke",
+    "check:lighthouse": "node tools/check-lighthouse.mjs",
+    "test:smoke": "playwright test tests/site.spec.mjs",
+    "test:visual": "playwright test tests/visual.spec.mjs",
+    "test:visual:update": "UPDATE_VISUAL_BASELINES=1 playwright test tests/visual.spec.mjs",
+    "verify": "npm run check:env && npm run build && npm run check:html && npm run check:links && npm run check:assets && npm run test:smoke && npm run test:visual && npm run check:lighthouse",
     "new:tech": "node tools/new-content.mjs tech",
     "new:journal": "node tools/new-content.mjs journal",
     "new:project": "node tools/new-content.mjs project",
@@ -50,7 +53,9 @@
   "devDependencies": {
     "@playwright/test": "1.62.0",
     "cheerio": "1.1.2",
+    "chrome-launcher": "1.2.1",
     "gray-matter": "4.0.3",
+    "lighthouse": "13.4.1",
     "sharp": "0.35.3"
   }
 }

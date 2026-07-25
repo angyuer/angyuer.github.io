@@ -23,6 +23,10 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+ignore:
+  - '**/source/images/posts/**/*.jpg'
+  - '**/source/images/posts/**/*.jpeg'
+  - '**/source/images/posts/**/*.png'
 
 # Writing
 new_post_name: :title.md

@@ -1,4 +1,10 @@
 (() => {
+  const initBackdropSupport = () => {
+    const supportsBackdrop = CSS.supports('backdrop-filter', 'blur(1px)') ||
+      CSS.supports('-webkit-backdrop-filter', 'blur(1px)')
+    document.documentElement.classList.toggle('no-backdrop-filter', !supportsBackdrop)
+  }
+
   const initThemeToggle = () => {
     const button = document.getElementById('nav-darkmode')
     if (!button || button.dataset.ready) return
@@ -66,6 +72,7 @@
   }
 
   const initSite = () => {
+    initBackdropSupport()
     initThemeToggle()
     initChannelFilter()
   }

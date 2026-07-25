@@ -189,7 +189,7 @@ search:
       enable: true
       hitsPerPage: 8
 share:
-  use: sharejs
+  use:
   sharejs:
     sites: wechat,weibo,qq
 comments:

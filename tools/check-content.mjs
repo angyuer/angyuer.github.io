@@ -73,6 +73,10 @@ const validateLocalImage = (file, imagePath, label) => {
     errors.push(`${file}: ${label}必须位于 /images/ 下或使用 HTTPS 地址`)
     return
   }
+  if (cleanPath.startsWith('/images/posts/') && !/\.(?:webp|avif)$/i.test(cleanPath)) {
+    errors.push(`${file}: ${label}位于文章图片目录时必须使用 WebP 或 AVIF：${imagePath}`)
+    return
+  }
 
   const resolved = path.resolve(sourceDir, cleanPath.replace(/^\/+/, ''))
   if (!resolved.startsWith(`${sourceDir}${path.sep}`) || !fs.existsSync(resolved)) {
