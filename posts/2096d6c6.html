@@ -1,0 +1,704 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>个人博客重构：从主题站点到内容系统 | 昂予</title><meta name="author" content="昂予"><meta name="copyright" content="昂予"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f2f2f0"><meta name="description" content="背景与目标这个博客最初以手动修改主题为主。页面可以访问，但主题依赖、内容格式、图片资源和发布流程缺少统一约束。随着修改增多，新设备克隆后能否构建、旧链接是否稳定，以及视觉是否一致，都变得难以确认。 这次重构没有更换 Hexo，也没有增加 CMS。目标是保留 Markdown 和 Git 的轻量写作方式，同时把博客整理成一个可以长期维护的个人内容系统。 我的职责我负责确定网站方向、整理旧内容，并持续">
+<meta property="og:type" content="article">
+<meta property="og:title" content="个人博客重构：从主题站点到内容系统">
+<meta property="og:url" content="https://angyuer.com/posts/2096d6c6.html">
+<meta property="og:site_name" content="昂予">
+<meta property="og:description" content="背景与目标这个博客最初以手动修改主题为主。页面可以访问，但主题依赖、内容格式、图片资源和发布流程缺少统一约束。随着修改增多，新设备克隆后能否构建、旧链接是否稳定，以及视觉是否一致，都变得难以确认。 这次重构没有更换 Hexo，也没有增加 CMS。目标是保留 Markdown 和 Git 的轻量写作方式，同时把博客整理成一个可以长期维护的个人内容系统。 我的职责我负责确定网站方向、整理旧内容，并持续">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://angyuer.com/images/hero/hero-desktop.webp">
+<meta property="article:published_time" content="2026-07-25T19:13:56.000Z">
+<meta property="article:modified_time" content="2026-07-25T19:13:56.000Z">
+<meta property="article:author" content="昂予">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="个人网站">
+<meta property="article:tag" content="前端工程化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://angyuer.com/images/hero/hero-desktop.webp"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "个人博客重构：从主题站点到内容系统",
+  "url": "https://angyuer.com/posts/2096d6c6.html",
+  "image": "https://angyuer.com/images/hero/hero-desktop.webp",
+  "datePublished": "2026-07-25T19:13:56.000Z",
+  "dateModified": "2026-07-25T19:13:56.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "昂予",
+      "url": "https://angyuer.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://angyublog.oss-cn-hangzhou.aliyuncs.com/common/avatar.JPG"><link rel="canonical" href="https://angyuer.com/posts/2096d6c6.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css?v=5.6.0"><link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0e0f0f')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#f2f2f0')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const start = 6
+              const end = 18
+              const isNight =
+                start < end
+                    ? hour < start || hour >= end
+                    : hour >= start || hour < end
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":false,"top_n_per_article":2,"unescape":false,"pagination":{"enable":true,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":720,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":120,"languages":{"author":"作者: 昂予","link":"链接: ","source":"来源: 昂予","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '个人博客重构：从主题站点到内容系统',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="昂予" type="application/atom+xml">
+</head><body><a class="skip-link" href="#content-inner">跳到主要内容</a><div class="bg-animation" id="web_bg" style="background-color: #f2f2f0;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://angyublog.oss-cn-hangzhou.aliyuncs.com/common/avatar.JPG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/ loading='lazy'></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/tech/"><span> 技术</span></a></div><div class="menus_item"><a class="site-page" href="/journal/"><span> 日记</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><picture class="hero-media post-hero-media" aria-hidden="true"><img src="/images/hero/hero-desktop.webp" alt="" width="1200" height="675" fetchpriority="high" decoding="sync" loading="eager"></picture><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">昂予</span></a><a class="nav-page-title" href="/"><span class="site-name">个人博客重构：从主题站点到内容系统</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><button class="nav-icon-button" id="nav-darkmode" type="button" title="日间和夜间模式切换" aria-label="日间和夜间模式切换"><i class="fas fa-adjust" aria-hidden="true"></i></button><div class="menus_items"><div class="menus_item"><a class="site-page" href="/tech/"><span> 技术</span></a></div><div class="menus_item"><a class="site-page" href="/journal/"><span> 日记</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">个人博客重构：从主题站点到内容系统</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-07-25T19:13:56.000Z" title="发表于 2026-07-26 03:13:56">2026-07-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-07-25T19:13:56.000Z" title="更新于 2026-07-26 03:13:56">2026-07-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">1.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:540,&quot;messagePrev&quot;:&quot;本文最后更新于&quot;,&quot;messageNext&quot;:&quot;天前，部分内容可能已经变化。&quot;,&quot;postUpdate&quot;:&quot;2026-07-26 03:13:56&quot;}" hidden></div><h2 id="背景与目标"><a href="#背景与目标" class="headerlink" title="背景与目标"></a>背景与目标</h2><p>这个博客最初以手动修改主题为主。页面可以访问，但主题依赖、内容格式、图片资源和发布流程缺少统一约束。随着修改增多，新设备克隆后能否构建、旧链接是否稳定，以及视觉是否一致，都变得难以确认。</p>
+<p>这次重构没有更换 Hexo，也没有增加 CMS。目标是保留 Markdown 和 Git 的轻量写作方式，同时把博客整理成一个可以长期维护的个人内容系统。</p>
+<h2 id="我的职责"><a href="#我的职责" class="headerlink" title="我的职责"></a>我的职责</h2><p>我负责确定网站方向、整理旧内容，并持续判断视觉是否符合自己的审美。实现范围包括工程依赖、主题管理、内容规范、首页与文章页体验、自动构建和质量检查。</p>
+<p>网站最终围绕技术、日记和项目三个频道组织。技术成长通过真实文章、标签和项目体现，不再额外维护一份容易过期的技能清单。</p>
+<h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><p>工程运行时统一为 Node.js 22，站点使用 Hexo 8.1.2 和 Butterfly 5.6.0。主题代码直接纳入仓库，避免全新克隆依赖缺失的 Git 子模块。</p>
+<p>写作流程增加了三条创建命令，自动生成统一的 Front Matter 和文章图片目录。内容检查遵循阮一峰的中文技术文档规范，并补充了标题层级、摘要、频道、标签、图片和永久链接规则。</p>
+<p>视觉上保留沉浸式首页大图。首屏只显示名称与简短介绍，导航在首屏保持透明；内容区使用克制的液态玻璃和卡片层级，正文继续使用高对比度实体背景。浅色、深色、减少动态和不支持背景模糊的环境都有独立处理。</p>
+<p>发布前由统一命令完成内容检查、图片优化、Hexo 构建、HTML 检查、链接检查、资源预算、交互测试、视觉回归和 Lighthouse 检查。推送到 <code>hexo</code> 分支后，再由 GitHub Actions 构建并发布到 <code>main</code> 分支。</p>
+<h2 id="难点与取舍"><a href="#难点与取舍" class="headerlink" title="难点与取舍"></a>难点与取舍</h2><p>液态玻璃需要背景层次才能成立，但过多透明表面会降低阅读效率。因此，玻璃只用于导航、搜索、目录和少量强调区域，文章正文与主要信息列表使用稳定的实体表面。</p>
+<p>主题直接纳入仓库会增加代码体积，却换来了可重复构建和可控修改。对个人博客来说，这个取舍比依赖不完整的主题链接更可靠。</p>
+<p>旧文章暂时保留了少量检查例外。它们不会阻塞新内容，但需要在后续重写时逐步移除。依赖审计中剩余的问题来自 Stylus 构建链，目前记录在依赖策略中，并限制在可信的本地构建环境内。</p>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>全新环境可以通过 <code>npm ci</code> 安装依赖，并使用 <code>npm run verify</code> 完成完整验证。技术、日记和项目文章可以通过快捷命令创建，图片会在构建前生成 WebP 和 AVIF 版本。</p>
+<p>当前 Lighthouse 结果如下：</p>
+<table>
+<thead>
+<tr>
+<th>页面</th>
+<th align="right">Performance</th>
+<th align="right">Accessibility</th>
+<th align="right">Best Practices</th>
+<th align="right">SEO</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>首页</td>
+<td align="right">88</td>
+<td align="right">100</td>
+<td align="right">100</td>
+<td align="right">100</td>
+</tr>
+<tr>
+<td>文章页</td>
+<td align="right">94</td>
+<td align="right">100</td>
+<td align="right">100</td>
+<td align="right">100</td>
+</tr>
+</tbody></table>
+<p>旧文章永久链接、RSS、Sitemap、CNAME、搜索、主题切换、代码复制和 Twikoo 评论也纳入了自动检查。</p>
+<h2 id="版本记录"><a href="#版本记录" class="headerlink" title="版本记录"></a>版本记录</h2><table>
+<thead>
+<tr>
+<th>时间</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2026-07-26</td>
+<td>完成工程地基、视觉系统、内容工作流和第一版项目展示。</td>
+</tr>
+</tbody></table>
+<h2 id="复盘"><a href="#复盘" class="headerlink" title="复盘"></a>复盘</h2><p>这次重构最重要的变化不是某一个视觉效果，而是建立了可以持续演进的边界。内容、视觉和工程流程有了各自的规则，新修改能够被验证，旧问题也能逐步处理。</p>
+<p>下一步是补充 About 页面、首页内容层级和真实项目案例，再按新的写作规范重写旧文章。个人网站不会一次完成，它会随着新的技术实践和生活记录继续更新。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/ruanyf/document-style-guide">阮一峰《中文技术文档的写作规范》</a></li>
+<li><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo 官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://butterfly.js.org/">Butterfly 主题文档</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://angyuer.com">昂予</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://angyuer.com/posts/2096d6c6.html">https://angyuer.com/posts/2096d6c6.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://angyuer.com" target="_blank">昂予</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Hexo/">Hexo</a><a class="post-meta__tags" href="/tags/%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99/">个人网站</a><a class="post-meta__tags" href="/tags/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/">前端工程化</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/13bdc7d.html" title="Hexo 图片优化与自动发布实践"><img class="cover" src="/images/covers/markdown.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post" loading='lazy'><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Hexo 图片优化与自动发布实践</div></div><div class="info-2"><div class="info-item-1">问题静态博客的文章通常很轻，真正容易拖慢页面的是图片。一张未经处理的相机照片可能超过数兆字节，还可能带来尺寸过大、格式不统一、构建结果不可重复等问题。 过去新增图片时，我会直接使用外部 OSS 地址，或者把原图放进静态目录。这样虽然方便，却没有统一的尺寸和体积限制。外部资源失效时，文章也会出现无法控制的空白。 这次重构保留了已有的 OSS 图片，同时为...</div></div></div></a><a class="pagination-related" href="/posts/f134a8e5.html" title="Markdown 基本语法"><img class="cover" src="/images/covers/markdown.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post" loading='lazy'><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Markdown 基本语法</div></div><div class="info-2"><div class="info-item-1">IT常识 简介.md即markdown文件的基本常用编写语法，是一种快速标记、快速排版语言，现在很多前端项目中的说明文件readme等都是用.md文件编写的，而且很多企业也在鼓励使用这种编辑方式。下面就简单和大家分享一些.md基本语法。 一、基本符号： *-+.&gt;1.前面带#号，后面带文字，分别表示h1-h6，只到h6，而且h1下面会有一条横线 ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/posts/13bdc7d.html" title="Hexo 图片优化与自动发布实践"><img class="cover" src="/images/covers/markdown.webp" alt="cover" loading='lazy'><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2026-07-26</div><div class="info-item-2">Hexo 图片优化与自动发布实践</div></div><div class="info-2"><div class="info-item-1">问题静态博客的文章通常很轻，真正容易拖慢页面的是图片。一张未经处理的相机照片可能超过数兆字节，还可能带来尺寸过大、格式不统一、构建结果不可重复等问题。 过去新增图片时，我会直接使用外部 OSS 地址，或者把原图放进静态目录。这样虽然方便，却没有统一的尺寸和体积限制。外部资源失效时，文章也会出现无法控制的空白。 这次重构保留了已有的 OSS 图片，同时为...</div></div></div></a><a class="pagination-related" href="/posts/b0be42a2.html" title="为什么重新开始维护个人网站"><img class="cover" src="/images/covers/journal.webp" alt="cover" loading='lazy'><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2026-07-26</div><div class="info-item-2">为什么重新开始维护个人网站</div></div><div class="info-2"><div class="info-item-1">记录重新打开这个网站时，我最先注意到的是界面。旧页面保留了许多主题默认内容和强效果，单独看某个组件并没有明显问题，放在一起却缺少统一的节奏。 我开始调整首页、导航和卡片，希望网站更有沉浸感，也更接近自己喜欢的简洁状态。修改几轮以后，问题逐渐从“页面不好看”变成了“这个网站能不能长期维护”。 主题依赖没有完整纳入仓库，文章格式各不相同，图片没有稳定目录，...</div></div></div></a><a class="pagination-related" href="/posts/4a17b156.html" title="Hello World"><img class="cover" src="/images/covers/hello.webp" alt="cover" loading='lazy'><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2023-02-19</div><div class="info-item-2">Hello World</div></div><div class="info-2"><div class="info-item-1">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF%E4%B8%8E%E7%9B%AE%E6%A0%87"><span class="toc-text">背景与目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%81%8C%E8%B4%A3"><span class="toc-text">我的职责</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%A1%88"><span class="toc-text">方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%BE%E7%82%B9%E4%B8%8E%E5%8F%96%E8%88%8D"><span class="toc-text">难点与取舍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C"><span class="toc-text">结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E8%AE%B0%E5%BD%95"><span class="toc-text">版本记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E7%9B%98"><span class="toc-text">复盘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li></ol></div></div></div></div></main><footer id="footer"><div class="footer-inner"><nav class="footer-links" aria-label="页脚导航"><a href="/about/">关于</a><a href="/archives/">归档</a><a href="/tags/">标签</a><a href="/images/">图片</a><a href="/music/">音乐</a><a href="/movies/">电影</a><a href="/link/">友链</a><a href="/atom.xml">RSS</a></nav><div class="footer-copyright">&copy;&nbsp;2020 - 2026 昂予</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"></div><div id="rightside-config-show"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.6.0"></script><script src="/js/main.js?v=5.6.0"></script><div class="js-pjax"><script>(() => {
+  const parseViewBox = viewBox => {
+    if (!viewBox) return null
+    const parts = viewBox.trim().split(/[\s,]+/).map(n => Number(n))
+    if (parts.length !== 4 || parts.some(n => Number.isNaN(n))) return null
+    return parts
+  }
+
+  const getSvgViewBox = svg => {
+    const attr = parseViewBox(svg.getAttribute('viewBox'))
+    if (attr) return attr
+
+    // Fallback: use bbox to build a viewBox
+    try {
+      const bbox = svg.getBBox()
+      if (bbox && bbox.width && bbox.height) return [bbox.x, bbox.y, bbox.width, bbox.height]
+    } catch (e) {
+      // getBBox may fail on some edge cases; ignore
+    }
+
+    const w = Number(svg.getAttribute('width')) || 0
+    const h = Number(svg.getAttribute('height')) || 0
+    if (w > 0 && h > 0) return [0, 0, w, h]
+    return [0, 0, 100, 100]
+  }
+
+  const setSvgViewBox = (svg, vb) => {
+    svg.setAttribute('viewBox', `${vb[0]} ${vb[1]} ${vb[2]} ${vb[3]}`)
+  }
+
+  const clamp = (v, min, max) => Math.max(min, Math.min(max, v))
+
+  const openSvgInNewTab = ({ source, initViewBox }) => {
+    const getClonedSvg = () => {
+      if (typeof source === 'string') {
+        const template = document.createElement('template')
+        template.innerHTML = source.trim()
+        const svg = template.content.querySelector('svg')
+        return svg ? svg.cloneNode(true) : null
+      }
+      if (source && typeof source.cloneNode === 'function') {
+        return source.cloneNode(true)
+      }
+      return null
+    }
+
+    const clone = getClonedSvg()
+    if (!clone) return
+    if (initViewBox && initViewBox.length === 4) {
+      clone.setAttribute('viewBox', initViewBox.join(' '))
+    }
+    if (!clone.getAttribute('xmlns')) clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+    if (!clone.getAttribute('xmlns:xlink') && clone.innerHTML.includes('xlink:')) {
+      clone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink')
+    }
+    // inject background to match current theme
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
+    const bg = getComputedStyle(document.body).backgroundColor || (isDark ? '#1e1e1e' : '#ffffff')
+    if (!clone.style.background) clone.style.background = bg
+
+    const serializer = new XMLSerializer()
+    const svgSource = serializer.serializeToString(clone)
+    const htmlSource = `<!doctype html><html><head><meta charset="utf-8" />
+      <style>
+        html, body { width: 100%; height: 100%; margin: 0; display: flex; align-items: center; justify-content: center; background: ${bg}; }
+        svg { max-width: 100%; max-height: 100%; height: auto; width: auto; }
+      </style>
+      </head><body>${svgSource}</body></html>`
+    const blob = new Blob([htmlSource], { type: 'text/html;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    window.open(url, '_blank', 'noopener')
+
+    setTimeout(() => URL.revokeObjectURL(url), 5000)
+  }
+
+  const attachMermaidViewerButton = wrap => {
+    let btn = wrap.querySelector('.mermaid-open-btn')
+    if (!btn) {
+      btn = document.createElement('button')
+      btn.type = 'button'
+      btn.className = 'mermaid-open-btn'
+      wrap.appendChild(btn)
+    }
+
+    btn.innerHTML = '<i class="fa fa-search fa-fw" aria-hidden="true"></i>'
+
+    if (!btn.__mermaidViewerBound) {
+      btn.addEventListener('click', e => {
+        e.preventDefault()
+        e.stopPropagation()
+        const svg = wrap.__mermaidOriginalSvg || wrap.querySelector('svg')
+        if (!svg) return
+        const initViewBox = wrap.__mermaidInitViewBox
+        openSvgInNewTab({ source: svg, initViewBox })
+      })
+      btn.__mermaidViewerBound = true
+    }
+  }
+
+  // Zoom around a point (px, py) in the SVG viewport (in viewBox coordinates)
+  const zoomAtPoint = (vb, factor, px, py) => {
+    const w = vb[2] * factor
+    const h = vb[3] * factor
+    const nx = px - (px - vb[0]) * factor
+    const ny = py - (py - vb[1]) * factor
+    return [nx, ny, w, h]
+  }
+
+  const initMermaidGestures = wrap => {
+    // Clean up previous event listeners and pending frames
+    if (wrap.__mermaidAbortController) {
+      wrap.__mermaidAbortController.abort()
+      if (wrap.__mermaidRafId) cancelAnimationFrame(wrap.__mermaidRafId)
+    }
+    const ac = new AbortController()
+    wrap.__mermaidAbortController = ac
+    const svg = wrap.querySelector('svg')
+    if (!svg) return
+
+    // Ensure viewBox exists so gestures always work
+    const initVb = getSvgViewBox(svg)
+    wrap.__mermaidInitViewBox = initVb
+    wrap.__mermaidCurViewBox = initVb.slice()
+    setSvgViewBox(svg, initVb)
+    // Disable default gestures to prevent scroll chaining and pinch-zoom penetration in Chrome
+    svg.style.touchAction = 'none'
+
+    // Cache BoundingClientRect, throttled on scroll to reduce reflow
+    let cachedRect = svg.getBoundingClientRect()
+    let rectDirty = false
+    const markRectDirty = () => { rectDirty = true }
+    window.addEventListener('resize', markRectDirty, { signal: ac.signal })
+    window.addEventListener('scroll', markRectDirty, { signal: ac.signal, capture: true })
+    const getRect = () => {
+      if (rectDirty) {
+        cachedRect = svg.getBoundingClientRect()
+        rectDirty = false
+      }
+      return cachedRect
+    }
+
+    // Precompute clamp bounds from initial viewBox
+    const minW = initVb[2] * 0.1
+    const maxW = initVb[2] * 10
+    const minH = initVb[3] * 0.1
+    const maxH = initVb[3] * 10
+    const clampVb = vb => {
+      const out = vb.slice()
+      out[2] = clamp(out[2], minW, maxW)
+      out[3] = clamp(out[3], minH, maxH)
+      return out
+    }
+
+    // Throttle DOM updates using requestAnimationFrame
+    let pendingVb = null
+    let rafId = null
+    const applyVb = () => {
+      if (pendingVb) {
+        wrap.__mermaidCurViewBox = pendingVb
+        setSvgViewBox(svg, pendingVb)
+        pendingVb = null
+      }
+      rafId = null
+      wrap.__mermaidRafId = null
+    }
+    const setCurVb = vb => {
+      pendingVb = clampVb(vb)
+      if (!rafId) {
+        rafId = requestAnimationFrame(applyVb)
+        wrap.__mermaidRafId = rafId
+      }
+    }
+
+    const state = {
+      pointers: new Map(),
+      startVb: null,
+      startDist: 0,
+      lastPointerX: 0,
+      lastPointerY: 0
+    }
+
+    const onPointerDown = e => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return
+      svg.setPointerCapture(e.pointerId)
+      const curVb = wrap.__mermaidCurViewBox
+      state.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
+      if (state.pointers.size === 1) {
+        state.startVb = curVb.slice()
+        state.lastPointerX = e.clientX
+        state.lastPointerY = e.clientY
+      } else if (state.pointers.size === 2) {
+        const pts = [...state.pointers.values()]
+        const dx = pts[0].x - pts[1].x
+        const dy = pts[0].y - pts[1].y
+        state.startDist = Math.hypot(dx, dy)
+        state.startVb = curVb.slice()
+      }
+    }
+
+    const onPointerMove = e => {
+      if (!state.pointers.has(e.pointerId)) return
+      state.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
+      const curVb = wrap.__mermaidCurViewBox
+      const rect = getRect()
+      if (state.pointers.size === 1 && state.startVb) {
+        const p = state.pointers.values().next().value
+        const dxClient = p.x - state.lastPointerX
+        const dyClient = p.y - state.lastPointerY
+        state.lastPointerX = p.x
+        state.lastPointerY = p.y
+        const dx = dxClient * (curVb[2] / rect.width)
+        const dy = dyClient * (curVb[3] / rect.height)
+        setCurVb([curVb[0] - dx, curVb[1] - dy, curVb[2], curVb[3]])
+        return
+      }
+      if (state.pointers.size === 2 && state.startVb && state.startDist > 0) {
+        const pts = [...state.pointers.values()]
+        const dx = pts[0].x - pts[1].x
+        const dy = pts[0].y - pts[1].y
+        const dist = Math.hypot(dx, dy)
+        if (!dist) return
+        const factor = state.startDist / dist
+        const cx = (pts[0].x + pts[1].x) / 2
+        const cy = (pts[0].y + pts[1].y) / 2
+        const px = curVb[0] + (cx - rect.left) * (curVb[2] / rect.width)
+        const py = curVb[1] + (cy - rect.top) * (curVb[3] / rect.height)
+        setCurVb(zoomAtPoint(state.startVb, factor, px, py))
+      }
+    }
+
+    const onPointerUpOrCancel = e => {
+      // Release PointerCapture to avoid event capture anomalies
+      if (svg.hasPointerCapture && svg.hasPointerCapture(e.pointerId)) {
+        svg.releasePointerCapture(e.pointerId)
+      }
+      state.pointers.delete(e.pointerId)
+      if (state.pointers.size === 0) {
+        state.startVb = null
+        state.startDist = 0
+      } else if (state.pointers.size === 1) {
+        const p = state.pointers.values().next().value
+        state.lastPointerX = p.x
+        state.lastPointerY = p.y
+      }
+    }
+
+    const onWheel = e => {
+      // Prevent event bubbling from triggering external scroll
+      e.preventDefault()
+      e.stopPropagation()
+      // Normalize deltaY across deltaMode (Chrome uses pixels, Safari uses lines)
+      let delta = e.deltaY
+      if (e.deltaMode === 1) delta *= 16
+      else if (e.deltaMode === 2) delta *= 400
+
+      // Continuous zoom factor: smoother than fixed 1.1/0.9 steps
+      const zoomFactor = Math.pow(1.001, delta)
+
+      const curVb = wrap.__mermaidCurViewBox
+      const rect = getRect()
+      const px = curVb[0] + (e.clientX - rect.left) * (curVb[2] / rect.width)
+      const py = curVb[1] + (e.clientY - rect.top) * (curVb[3] / rect.height)
+      setCurVb(zoomAtPoint(curVb, zoomFactor, px, py))
+    }
+
+    const onDblClick = () => {
+      const init = wrap.__mermaidInitViewBox
+      if (init) setCurVb(init)
+    }
+
+    svg.addEventListener('pointerdown', onPointerDown, { signal: ac.signal })
+    svg.addEventListener('pointermove', onPointerMove, { signal: ac.signal })
+    svg.addEventListener('pointerup', onPointerUpOrCancel, { signal: ac.signal })
+    svg.addEventListener('pointercancel', onPointerUpOrCancel, { signal: ac.signal })
+    svg.addEventListener('wheel', onWheel, { passive: false, signal: ac.signal })
+    svg.addEventListener('dblclick', onDblClick, { signal: ac.signal })
+  }
+
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'neutral'
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      // Clean up event listeners before removing old SVG
+      if (item.__mermaidAbortController) {
+        item.__mermaidAbortController.abort()
+      }
+      const oldSvg = item.querySelector('svg')
+      if (oldSvg) oldSvg.remove()
+      let config = {}
+      try {
+        config = mermaidSrc.dataset.config ? JSON.parse(mermaidSrc.dataset.config) : {}
+      } catch (e) {
+        console.warn('[mermaid] failed to parse dataset.config:', e)
+      }
+      if (!config.theme) {
+        config.theme = theme
+      }
+      const mermaidThemeConfig = `%%{init: ${JSON.stringify(config)}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+        if (true) initMermaidGestures(item)
+        item.__mermaidOriginalSvg = svg
+        if (true) attachMermaidViewerButton(item)
+      }
+
+      const handleError = err => {
+        console.error(`[mermaid] render failed for block #${index}:`, err)
+        const errorEl = document.createElement('div')
+        errorEl.className = 'mermaid-error'
+        errorEl.textContent = `Mermaid render error: ${err.message || err}`
+        mermaidSrc.insertAdjacentElement('afterend', errorEl)
+      }
+
+      try {
+        const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+        // mermaid v9 and v10 compatibility
+        if (typeof renderFn === 'string') {
+          renderMermaid(renderFn)
+        } else {
+          renderFn.then(({ svg }) => renderMermaid(svg)).catch(handleError)
+        }
+      } catch (err) {
+        handleError(err)
+      }
+    })
+  }
+
+  const codeToMermaid = $article => {
+    const codeMermaidEle = $article.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    const $article = document.getElementById('article-container')
+    if (!$article) return
+
+    if (true) codeToMermaid($article)
+    const $mermaid = $article.querySelectorAll('.mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid@11.16.0/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.angyuer.com/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const init = (el = document, path = location.pathname) => {
+    twikoo.init({
+      el: el.querySelector('#twikoo-wrap'),
+      envId: 'https://twikoo.angyuer.com/',
+      region: '',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      },
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    
+
+    isShuoshuo && (window.shuoshuoComment.destroyTwikoo = () => {
+      if (el.children.length) {
+        el.innerHTML = ''
+        el.classList.add('no-comment')
+      }
+    })
+  }
+
+  const loadTwikoo = (el, path) => {
+    if (typeof twikoo === 'object') setTimeout(() => init(el, path), 0)
+    else btf.getScript('https://cdn.jsdelivr.net/npm/twikoo@1.7.14/dist/twikoo.all.min.js').then(() => init(el, path))
+  }
+
+  if (isShuoshuo) {
+    'Twikoo' === 'Twikoo'
+      ? window.shuoshuoComment = { loadComment: loadTwikoo }
+      : window.loadOtherComment = loadTwikoo
+    return
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script defer src="/js/site.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章、标签或项目" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.6.0"></script></div></div></body></html>
