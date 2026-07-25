@@ -1,0 +1,15 @@
+extends includes/layout.pug
+include ./includes/mixins/indexPostUI.pug
+
+block content
+  section.post-stream(aria-labelledby='post-stream-title')
+    .section-heading.post-stream__heading
+      .section-heading__title
+        span.section-heading__index(aria-hidden='true') 01
+        h2#post-stream-title 最近更新
+      .channel-filter(role='group' aria-label='按内容频道筛选')
+        button.channel-filter__button.is-active(type='button' data-channel-filter='all' aria-pressed='true') 全部
+        button.channel-filter__button(type='button' data-channel-filter='tech' aria-pressed='false') 技术
+        button.channel-filter__button(type='button' data-channel-filter='journal' aria-pressed='false') 日记
+        button.channel-filter__button(type='button' data-channel-filter='project' aria-pressed='false') 项目
+    +indexPostUI

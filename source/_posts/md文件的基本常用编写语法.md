@@ -1,15 +1,17 @@
 ---
-title:
-  - markdown语法
-tags:
-  - markdown
-categories:
-  - markdown
-# top_img:
-#   - 'https://api.likepoems.com/img/mc'
-abbrlink: f134a8e5
+layout: post
+title: Markdown 基本语法
 date: 2023-02-20 23:23:30
-cover: https://angyublog.oss-cn-hangzhou.aliyuncs.com/wallpaper/wallpaper_37.jpg
+updated: 2023-02-20 23:23:30
+channel: tech
+categories:
+  - 技术
+tags:
+  - Markdown
+summary: 汇总 Markdown 标题、列表、引用、代码和表格等常用书写方式。
+abbrlink: f134a8e5
+cover: /images/covers/markdown.webp
+featured: false
 ---
 
 [IT常识](https://it.cha138.com/shida/show-319358.html)
@@ -147,7 +149,7 @@ n个...
 语法：
 <table><tr><td bgcolor="edf0f1">
 
-1 [超链接名](超链接地址 "超链接title")
+1 [超链接名](https://example.com "超链接title")
 2 title可加可不加
 
 </td></tr></table>

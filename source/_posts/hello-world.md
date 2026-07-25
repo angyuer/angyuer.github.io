@@ -1,7 +1,17 @@
 ---
+layout: post
 title: Hello World
+date: 2023-02-19 19:49:48
+updated: 2023-02-19 19:49:48
+channel: tech
+categories:
+  - 技术
+tags:
+  - Hexo
+summary: Hexo 初始示例文章，记录博客创建、预览、生成与部署的基本命令。
 abbrlink: 4a17b156
-cover: https://angyublog.oss-cn-hangzhou.aliyuncs.com/wallpaper/wallpaper_27.jpg
+cover: /images/covers/hello.webp
+featured: false
 ---
 Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
 

@@ -1,0 +1,16 @@
+extends includes/layout.pug
+
+block content
+  section.channel-page-header
+    span.section-kicker CHANNEL
+    h1=page.title
+    p=page.channelDescription
+
+  include ./includes/mixins/indexPostUI.pug
+  if page.posts && page.posts.data && page.posts.data.length
+    +indexPostUI
+  else
+    .channel-empty
+      i.far.fa-folder-open(aria-hidden='true')
+      h2 这里正在整理
+      p 新内容会在完成后出现在这里。
