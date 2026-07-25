@@ -1,0 +1,72 @@
+extends includes/layout.pug
+
+block content
+  -
+    const projects = page.posts && page.posts.data ? page.posts.data : []
+    const statusLabels = { ongoing: '进行中', completed: '已完成', paused: '已暂停' }
+
+  section.channel-page-header.project-page-header(aria-labelledby='projects-title')
+    .project-page-header__copy
+      span.section-kicker PROJECTS
+      h1#projects-title=page.title
+      p=page.channelDescription
+    .project-page-header__count(aria-label=`共 ${projects.length} 个项目`)
+      strong=String(projects.length).padStart(2, '0')
+      span 个项目
+
+  if projects.length
+    section.project-showcase-list(aria-label='项目列表')
+      each project, index in projects
+        -
+          const link = project.link || project.path
+          const title = project.title || _p('no_title')
+          const cover = project.cover || theme.cover.default_cover
+          const status = project.project_status || 'ongoing'
+          const stack = Array.isArray(project.project_stack) ? project.project_stack : []
+          const projectLinks = Array.isArray(project.project_links) ? project.project_links : []
+        article.project-showcase-card
+          a.project-showcase-card__cover(href=url_for(link) tabindex='-1' aria-hidden='true')
+            img(src=url_for(cover) alt='' width='1200' height='675' loading=index === 0 ? 'eager' : 'lazy' fetchpriority=index === 0 ? 'high' : 'low' decoding='async')
+          .project-showcase-card__body
+            .project-showcase-card__meta
+              span.project-status(class=`is-${status}`)
+                i(aria-hidden='true')
+                =statusLabels[status] || '项目记录'
+              time(datetime=date_xml(project.updated || project.date))='更新于 ' + date(project.updated || project.date, config.date_format)
+
+            h2
+              a(href=url_for(link))=title
+            if project.summary
+              p.project-showcase-card__summary=project.summary
+
+            dl.project-facts
+              div
+                dt 周期
+                dd=project.project_period
+              div
+                dt 职责
+                dd=project.project_role
+
+            if stack.length
+              ul.project-stack(aria-label='技术栈')
+                each item in stack
+                  li=item
+
+            .project-showcase-card__actions
+              nav.project-external-links(aria-label=`${title} 项目链接`)
+                each projectLink in projectLinks
+                  - const external = /^https:\/\//.test(projectLink.url)
+                  a(href=external ? projectLink.url : url_for(projectLink.url) target=external ? '_blank' : false rel=external ? 'noopener noreferrer' : false)
+                    if /github/i.test(projectLink.label)
+                      i.fab.fa-github(aria-hidden='true')
+                    else
+                      i.fas.fa-arrow-up-right-from-square(aria-hidden='true')
+                    span=projectLink.label
+              a.project-detail-link(href=url_for(link))
+                span 阅读项目复盘
+                i.fas.fa-arrow-right(aria-hidden='true')
+  else
+    .channel-empty
+      i.far.fa-folder-open(aria-hidden='true')
+      h2 项目正在整理
+      p 完成后的项目会在这里留下过程与结果。

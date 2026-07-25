@@ -47,5 +47,5 @@ header#page-header(class=`${headerClassName + isFixedClass}` style=globalPageTyp
         h1#site-title=page.title || page.tag || page.category
   else
     //- improve seo
-    if globalPageType !== 'post' && globalPageType !== '404' && page.type !== 'channel'
+    if globalPageType !== 'post' && globalPageType !== '404' && !['channel', 'projects', 'about'].includes(page.type)
       h1.title-seo=page.title || page.tag || page.category || config.title

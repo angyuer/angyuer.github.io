@@ -114,6 +114,16 @@ const frontMatter = {
   featured: false
 }
 
+if (channel === 'project') {
+  Object.assign(frontMatter, {
+    project_status: 'ongoing',
+    project_period: '',
+    project_role: '',
+    project_stack: [],
+    project_links: []
+  })
+}
+
 fs.mkdirSync(path.dirname(output), { recursive: true })
 fs.mkdirSync(imageDir, { recursive: true })
 fs.writeFileSync(output, matter.stringify(`\n${BODY_TEMPLATES[channel]}\n`, frontMatter), 'utf8')

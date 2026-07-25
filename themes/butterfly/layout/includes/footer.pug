@@ -2,6 +2,7 @@
 - const sinceYear = theme.footer.owner.since
 .footer-inner
   nav.footer-links(aria-label='页脚导航')
+    a(href=url_for('/about/')) 关于
     a(href=url_for('/archives/')) 归档
     a(href=url_for('/tags/')) 标签
     a(href=url_for('/images/')) 图片

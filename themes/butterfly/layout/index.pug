@@ -1,15 +1,108 @@
 extends includes/layout.pug
-include ./includes/mixins/indexPostUI.pug
+
+mixin sectionHeading(index, id, title, link, linkText)
+  .home-section__heading
+    .section-heading__title
+      span.section-heading__index(aria-hidden='true')=index
+      h2(id=id)=title
+    if link
+      a.home-section__link(href=url_for(link))
+        span=linkText
+        i.fas.fa-arrow-right(aria-hidden='true')
+
+mixin featuredCard(article, className)
+  - const channelLabels = { tech: '技术', journal: '日记', project: '项目' }
+  - const channel = article.channel || 'tech'
+  - const link = article.link || article.path
+  - const title = article.title || _p('no_title')
+  - const cover = article.cover || theme.cover.default_cover
+  article.home-feature-card(class=className)
+    a.home-feature-card__cover(href=url_for(link) tabindex='-1' aria-hidden='true')
+      img(src=url_for(cover) alt='' width='1200' height='675' loading='lazy' decoding='async')
+    .home-feature-card__body
+      .home-card-meta
+        span=channelLabels[channel] || channelLabels.tech
+        span(aria-hidden='true') ·
+        time(datetime=date_xml(article.updated || article.date))=date(article.updated || article.date, config.date_format)
+      a.home-feature-card__title(href=url_for(link))=title
+      if article.summary
+        p=article.summary
+      a.home-card-action(href=url_for(link) aria-label=`阅读《${title}》`)
+        i.fas.fa-arrow-right(aria-hidden='true')
 
 block content
-  section.post-stream(aria-labelledby='post-stream-title')
-    .section-heading.post-stream__heading
-      .section-heading__title
-        span.section-heading__index(aria-hidden='true') 01
-        h2#post-stream-title 最近更新
-      .channel-filter(role='group' aria-label='按内容频道筛选')
-        button.channel-filter__button.is-active(type='button' data-channel-filter='all' aria-pressed='true') 全部
-        button.channel-filter__button(type='button' data-channel-filter='tech' aria-pressed='false') 技术
-        button.channel-filter__button(type='button' data-channel-filter='journal' aria-pressed='false') 日记
-        button.channel-filter__button(type='button' data-channel-filter='project' aria-pressed='false') 项目
-    +indexPostUI
+  -
+    const allPosts = site.posts ? site.posts.sort('-date').toArray() : []
+    const featuredPosts = allPosts.filter(article => article.featured).slice(0, 3)
+    const recentPosts = allPosts.slice(0, 5)
+    const activeProject = allPosts.find(article => (article.channel || 'tech') === 'project')
+    const channelLabels = { tech: '技术', journal: '日记', project: '项目' }
+    const projectStatusLabels = { ongoing: '持续维护', completed: '已完成', paused: '暂缓更新' }
+    const channels = [
+      { key: 'tech', title: '技术', path: '/tech/', icon: 'fa-code', description: '工程实践、工具方法与问题拆解。' },
+      { key: 'journal', title: '日记', path: '/journal/', icon: 'fa-pen-nib', description: '生活片段、阶段思考与持续成长。' },
+      { key: 'project', title: '项目', path: '/projects/', icon: 'fa-layer-group', description: '作品过程、关键取舍与结果复盘。' }
+    ]
+
+  .home-sections.post-stream
+    section.home-section.home-featured(aria-labelledby='featured-title')
+      +sectionHeading('01', 'featured-title', '精选内容', '/archives/', '查看归档')
+      if featuredPosts.length
+        .home-feature-grid(class=featuredPosts.length === 1 ? 'is-one' : featuredPosts.length === 2 ? 'is-two' : '')
+          each article, index in featuredPosts
+            +featuredCard(article, index === 0 ? 'is-lead' : 'is-side')
+
+    section.home-section.home-updates(aria-labelledby='updates-title')
+      +sectionHeading('02', 'updates-title', '最近更新', '/archives/', '全部文章')
+      .home-update-list
+        each article, index in recentPosts
+          - const channel = article.channel || 'tech'
+          - const link = article.link || article.path
+          a.home-update-row(href=url_for(link))
+            span.home-update-row__number(aria-hidden='true')=String(index + 1).padStart(2, '0')
+            span.home-update-row__channel=channelLabels[channel] || channelLabels.tech
+            span.home-update-row__title=article.title || _p('no_title')
+            time(datetime=date_xml(article.updated || article.date))=date(article.updated || article.date, config.date_format)
+            i.fas.fa-arrow-right(aria-hidden='true')
+
+    section.home-section.home-project(aria-labelledby='project-title')
+      +sectionHeading('03', 'project-title', '进行中的项目', '/projects/', '全部项目')
+      if activeProject
+        - const projectLink = activeProject.link || activeProject.path
+        - const projectCover = activeProject.cover || theme.cover.default_cover
+        article.home-project-card
+          a.home-project-card__cover(href=url_for(projectLink) tabindex='-1' aria-hidden='true')
+            img(src=url_for(projectCover) alt='' width='1200' height='675' loading='lazy' decoding='async')
+          .home-project-card__body
+            .home-project-card__status
+              span(aria-hidden='true')
+              =projectStatusLabels[activeProject.project_status] || '项目记录'
+            h3
+              a(href=url_for(projectLink))=activeProject.title
+            if activeProject.summary
+              p=activeProject.summary
+            a.home-text-action(href=url_for(projectLink))
+              span 查看项目复盘
+              i.fas.fa-arrow-right(aria-hidden='true')
+      else
+        a.home-project-empty(href=url_for('/projects/'))
+          span 项目记录正在整理
+          i.fas.fa-arrow-right(aria-hidden='true')
+
+    section.home-section.home-channels(aria-labelledby='channels-title')
+      +sectionHeading('04', 'channels-title', '按频道阅读', '/about/', '关于本站')
+      .home-channel-grid
+        each channel in channels
+          - const channelPosts = allPosts.filter(article => (article.channel || 'tech') === channel.key)
+          - const latest = channelPosts[0]
+          a.home-channel-card(href=url_for(channel.path))
+            .home-channel-card__top
+              i.fas(class=channel.icon aria-hidden='true')
+              span=channelPosts.length + ' 篇'
+            h3=channel.title
+            p=channel.description
+            if latest
+              .home-channel-card__latest
+                span 最近
+                strong=latest.title
+            i.fas.fa-arrow-right.home-channel-card__arrow(aria-hidden='true')

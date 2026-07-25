@@ -1,0 +1,63 @@
+extends includes/layout.pug
+
+block content
+  article.about-page
+    header.about-hero
+      span.section-kicker ABOUT
+      h1=page.title
+      .about-hero__intro!=page.content
+
+    section.about-section(aria-labelledby='about-site-title')
+      .about-section__heading
+        span.section-heading__index(aria-hidden='true') 01
+        h2#about-site-title 这个网站
+      .about-statement-grid
+        article.about-statement
+          span 记录
+          h3 只写真正做过和想过的事
+          p 技术方案保留环境与验证，项目复盘说明取舍，日记记录阶段性的变化。
+        article.about-statement
+          span 整理
+          h3 让内容可以被再次找到
+          p 文章按技术、日记和项目归档，标签用于连接同一条知识线索。
+        article.about-statement
+          span 维护
+          h3 把个人网站当作长期项目
+          p 继续使用 Markdown 和 Git，让内容、代码与发布流程都可追踪。
+
+    section.about-section(aria-labelledby='about-channel-title')
+      .about-section__heading
+        span.section-heading__index(aria-hidden='true') 02
+        h2#about-channel-title 从这里开始
+      .about-channel-grid
+        a.about-channel(href=url_for('/tech/'))
+          i.fas.fa-code(aria-hidden='true')
+          h3 技术
+          p 工程实践、工具方法与问题拆解。
+          span 阅读技术文章
+        a.about-channel(href=url_for('/journal/'))
+          i.fas.fa-pen-nib(aria-hidden='true')
+          h3 日记
+          p 生活片段、阶段思考与持续成长。
+          span 阅读日记
+        a.about-channel(href=url_for('/projects/'))
+          i.fas.fa-layer-group(aria-hidden='true')
+          h3 项目
+          p 作品过程、关键取舍与结果复盘。
+          span 查看项目
+
+    section.about-contact(aria-labelledby='about-contact-title')
+      .about-contact__copy
+        span.section-kicker CONTACT
+        h2#about-contact-title 保持联系
+        p 可以通过 GitHub 或邮件找到我，也可以订阅 RSS 获取更新。
+      nav.about-contact__links(aria-label='联系与订阅')
+        a(href='https://github.com/angyuer' target='_blank' rel='noopener noreferrer')
+          i.fab.fa-github(aria-hidden='true')
+          span GitHub
+        a(href='mailto:angyuer@163.com')
+          i.fas.fa-envelope(aria-hidden='true')
+          span 邮件
+        a(href=url_for('/atom.xml'))
+          i.fas.fa-rss(aria-hidden='true')
+          span RSS

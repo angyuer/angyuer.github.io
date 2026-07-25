@@ -70,6 +70,10 @@ The result should feel personal and cinematic without becoming decorative or bus
   side cards, and one horizontal closing card.
 - Tablet cards: two columns with a full-width lead and final item.
 - Mobile cards: one column; retain card radius and page gutters.
+- Home content hierarchy: featured stories, recent updates, one active project, then
+  three channel entries. Each section has one purpose and avoids nested cards.
+- About uses an editorial profile layout with short statements, channel entry cards,
+  and direct contact links. It must not invent biography or career history.
 
 ## Interaction
 

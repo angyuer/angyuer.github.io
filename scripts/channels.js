@@ -9,10 +9,10 @@ const CHANNELS = [
 hexo.extend.generator.register('content-channels', locals => {
   return CHANNELS.map(channel => ({
     path: `${channel.slug}/index.html`,
-    layout: ['channel'],
+    layout: [channel.key === 'project' ? 'projects' : 'channel'],
     data: {
       title: channel.title,
-      type: 'channel',
+      type: channel.key === 'project' ? 'projects' : 'channel',
       channel: channel.key,
       channelDescription: channel.description,
       aside: false,

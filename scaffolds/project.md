@@ -10,6 +10,11 @@ tags: []
 summary:
 cover:
 featured: false
+project_status: ongoing # ongoing | completed | paused
+project_period:
+project_role:
+project_stack: []
+project_links: []
 ---
 
 <!-- 正文从 H2 开始，删除不需要的章节。 -->

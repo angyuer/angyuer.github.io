@@ -13,6 +13,10 @@ const cases = [
   { name: 'home-desktop-dark', path: '/', width: 1440, height: 1000, theme: 'dark' },
   { name: 'home-tablet-light', path: '/', width: 768, height: 1024, theme: 'light' },
   { name: 'home-mobile-light', path: '/', width: 390, height: 844, theme: 'light' },
+  { name: 'about-desktop-light', path: '/about/', width: 1440, height: 1000, theme: 'light' },
+  { name: 'about-mobile-dark', path: '/about/', width: 390, height: 844, theme: 'dark' },
+  { name: 'projects-desktop-light', path: '/projects/', width: 1440, height: 1000, theme: 'light' },
+  { name: 'projects-mobile-dark', path: '/projects/', width: 390, height: 844, theme: 'dark' },
   { name: 'post-desktop-dark', path: '/posts/4a17b156.html', width: 1440, height: 1000, theme: 'dark' },
   { name: 'home-mobile-fallback', path: '/', width: 390, height: 844, theme: 'light', fallback: true }
 ]

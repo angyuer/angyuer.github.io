@@ -26,6 +26,16 @@
 | `cover` | 本地 `/images/` 路径或 HTTPS 地址 |
 | `featured` | 布尔值 |
 
+项目频道还必须包含以下字段。
+
+| 字段 | 要求 |
+| --- | --- |
+| `project_status` | `ongoing`、`completed` 或 `paused` |
+| `project_period` | 项目时间范围，例如 `2026.07 - 至今` |
+| `project_role` | 本人在项目中负责的范围 |
+| `project_stack` | 1～8 项实际使用的技术或工具 |
+| `project_links` | 1～4 个 HTTPS 或站内链接，包含 `label` 和 `url` |
+
 ## 文件名
 
 - 文件名使用小写半角字母、数字和连字符，不使用空格、下划线或中文。

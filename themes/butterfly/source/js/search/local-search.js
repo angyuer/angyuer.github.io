@@ -495,9 +495,9 @@ window.addEventListener('load', () => {
 
   const openSearch = () => {
     btf.overflowPaddingR.add()
-    btf.animateIn($searchMask, 'to_show 0.5s')
-    btf.animateIn($searchDialog, 'titleScale 0.5s')
-    setTimeout(() => { $input.focus() }, 300)
+    btf.animateIn($searchMask, 'to_show 0.19s ease-out')
+    btf.animateIn($searchDialog, 'to_show 0.19s ease-out')
+    setTimeout(() => { $input.focus() }, 190)
     if (!loadFlag) {
       !localSearch.isfetched && localSearch.fetchData()
       $input.addEventListener('input', debouncedInputEvent)
@@ -512,8 +512,8 @@ window.addEventListener('load', () => {
 
   const closeSearch = () => {
     btf.overflowPaddingR.remove()
-    btf.animateOut($searchDialog, 'search_close .5s')
-    btf.animateOut($searchMask, 'to_hide 0.5s')
+    btf.animateOut($searchDialog, 'to_hide 0.14s ease-in')
+    btf.animateOut($searchMask, 'to_hide 0.14s ease-in')
     document.removeEventListener('keydown', handleEscape)
     window.removeEventListener('resize', onResize)
   }

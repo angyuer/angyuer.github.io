@@ -18,6 +18,7 @@ const legacyFilenameFiles = new Set([
 ])
 const errors = []
 const abbrlinks = new Map()
+const projectStatuses = new Set(['ongoing', 'completed', 'paused'])
 
 const files = fs.readdirSync(postsDir)
   .filter(file => file.endsWith('.md'))
@@ -198,6 +199,48 @@ for (const file of files) {
   else if (!/^https:\/\//i.test(cover)) validateLocalImage(file, cover, 'cover')
 
   if (typeof data.featured !== 'boolean') errors.push(`${file}: featured 必须是布尔值`)
+
+  if (data.channel === 'project') {
+    const projectFields = ['project_status', 'project_period', 'project_role', 'project_stack', 'project_links']
+    for (const field of projectFields) {
+      if (!(field in data) || data[field] === null) errors.push(`${file}: 项目文章缺少 ${field}`)
+    }
+
+    if (!projectStatuses.has(data.project_status)) {
+      errors.push(`${file}: project_status 必须是 ongoing、completed 或 paused`)
+    }
+
+    if (characterLength(data.project_period || '') < 2 || characterLength(data.project_period || '') > 40) {
+      errors.push(`${file}: project_period 长度必须为 2～40 个字符`)
+    }
+
+    if (characterLength(data.project_role || '') < 2 || characterLength(data.project_role || '') > 60) {
+      errors.push(`${file}: project_role 长度必须为 2～60 个字符`)
+    }
+
+    if (!Array.isArray(data.project_stack) || data.project_stack.length < 1 || data.project_stack.length > 8) {
+      errors.push(`${file}: project_stack 需要包含 1～8 项`)
+    } else {
+      const stack = data.project_stack.map(item => String(item).trim())
+      if (stack.some(item => !item)) errors.push(`${file}: project_stack 不能包含空值`)
+      if (new Set(stack).size !== stack.length) errors.push(`${file}: project_stack 不能重复`)
+    }
+
+    if (!Array.isArray(data.project_links) || data.project_links.length < 1 || data.project_links.length > 4) {
+      errors.push(`${file}: project_links 需要包含 1～4 项`)
+    } else {
+      for (const [index, link] of data.project_links.entries()) {
+        const label = link && typeof link === 'object' ? String(link.label || '').trim() : ''
+        const url = link && typeof link === 'object' ? String(link.url || '').trim() : ''
+        if (characterLength(label) < 2 || characterLength(label) > 20) {
+          errors.push(`${file}: project_links[${index}].label 长度必须为 2～20 个字符`)
+        }
+        if (!/^(?:https:\/\/|\/)/.test(url)) {
+          errors.push(`${file}: project_links[${index}].url 必须使用 HTTPS 或站内绝对路径`)
+        }
+      }
+    }
+  }
 
   if (data.abbrlink !== undefined) {
     const key = String(data.abbrlink)

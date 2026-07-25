@@ -50,13 +50,16 @@ featured: false
 
 `channel` 只接受 `tech`、`journal`、`project`。完成文章后运行完整验证：
 
+项目文章还需要填写 `project_status`、`project_period`、`project_role`、
+`project_stack` 和 `project_links`，这些信息会直接用于项目展示页。
+
 ```bash
 npm run verify
 ```
 
 该命令会依次检查 Node.js 环境、文章元数据、Hexo 干净构建、HTML/SEO、
 站内链接、静态资源预算、浏览器关键流程、视觉基线和 Lighthouse。本地浏览器测试
-使用 Chrome，覆盖首页、三个内容频道、搜索、主题切换、频道筛选、代码复制、
+使用 Chrome，覆盖首页内容层级、About、三个内容频道、搜索、主题切换、代码复制、
 Twikoo 初始化、旧链接、移动导航和减少动态模式。
 
 也可以单独执行：
