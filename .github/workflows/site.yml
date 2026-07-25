@@ -34,7 +34,7 @@ jobs:
 
       - name: Upload diagnostic reports
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: verification-reports
           path: |
@@ -44,7 +44,7 @@ jobs:
           retention-days: 7
 
       - name: Upload build artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: public-site
           path: public
